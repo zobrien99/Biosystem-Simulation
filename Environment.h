@@ -5,7 +5,9 @@ Date: 11/27/18
 Class: EEEE-346-01
 Assignment: Project 3
 
-Purpose:
+Purpose: Define the environmental conditions including
+temperature and food availability.  This file will
+serve as the base definition for the climates.
  
 */
 
@@ -15,7 +17,9 @@ Purpose:
 class Environment{
   
   protected:
-  char name;
+  
+  double food_amt;
+  char climate;
   std::vector<double> month_temp (12,0);
   unsigned int month;
   unsigned double precip_amt;
