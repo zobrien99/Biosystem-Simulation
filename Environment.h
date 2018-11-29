@@ -15,6 +15,7 @@ Purpose:
 class Environment{
   
   protected:
+  char name;
   std::vector<double> month_temp (12,0);
   unsigned int month;
   unsigned double precip_amt;
