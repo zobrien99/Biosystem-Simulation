@@ -17,7 +17,6 @@ class MicroOrganism :public Organism {
 	protected:
 		Point_3D l;
 	public:
-	
-	Point_3D getLocation();
-	void setLocation(double x_new, double y_new, double z_new);
+		Point_3D getLocation();
+		void setLocation(double x_new, double y_new, double z_new);
 };
