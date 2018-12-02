@@ -19,9 +19,14 @@ class Environment{
   protected:
 	  double temperature;
 	  int time;
+	  double max_temp;
+	  double min_temp;
 
-	public:
-		
+  public:
+	  double getMax_temp();
+    	  void setMax_temp(double);
+    	  void setMin_temp(double);
+    	  double getMin_temp();	
 
 };
 
