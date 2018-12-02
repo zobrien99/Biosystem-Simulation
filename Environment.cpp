@@ -11,6 +11,9 @@ Purpose:
 
 #include <iostream>
 #include "Environment.h"
+#include "Sinusoid.h"
+
+Sinusoid temp;
 
 
 
@@ -40,4 +43,6 @@ void Environment::setMin_temp(double b){
 void Environment::set_time(int c){
     time=c;
 }
+
+
 
