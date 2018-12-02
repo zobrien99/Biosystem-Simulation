@@ -24,7 +24,6 @@ class Organism{
 
 	public:
 		//abstract functions, must be defined in inherited classes
-		 virtual void eat() const = 0; 
 		 virtual void reproduce() const = 0;
 
 		 //getters
