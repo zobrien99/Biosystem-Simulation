@@ -14,11 +14,15 @@ in the environment.  It will include common features for every organism.
 class Organism{
 
 Protected:
- double consumption_rate;
+ double consumption_amount;
+ double consumption_time;
+ double reprodution_amount;
+ double reproduction_time;
+ double age;
 
 Public:
  
- virtual void eat() = 0; 
- virtual void reproduce() = 0;
+ virtual void eat() const = 0; 
+ virtual void reproduce() const = 0;
 
 };
