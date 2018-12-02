@@ -10,21 +10,27 @@ Purpose: sinusoid manipulation done in seperate class so as to describe sinfunct
 #pragma once
 
 class Sinusoid{
-    
     private:
-    
-        double amp, per, phase;
+		double amplitude, period, phase, offset;
     
     public:
-        double get_amp();
-        void set_amp(double, double);
-        double get_per();
-        void set_per(double);
-        double get_phase();
-        void set_phase(double);
-    
-        double func(double);
-    
-    
+		//constructors
+		Sinusoid();
+		Sinusoid(int a, int p, int ph, int o);
+
+		//getters
+		double get_amp();
+		double get_per();
+		double get_phase();
+		double get_off();
+
+		//setters
+		void set_amp(double, double);
+		void set_per(double);
+		void set_phase(double);
+		void set_off(double);
+
+		//final calc
+		double func(double);
 };
 
