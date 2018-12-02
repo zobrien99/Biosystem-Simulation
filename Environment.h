@@ -17,12 +17,15 @@ serve as the base definition for the climates.
 class Environment{
   
   protected:
-  
-  double food_amt;
-  char climate;
-  std::vector<double> month_temp (12,0);
-  unsigned int month;
-  unsigned double precip_amt;
-  
+	  double temperature;
+	  int time;
+
+	public:
+		
+
 };
+
+
+
+
   
