@@ -5,41 +5,58 @@ Date: 12/1/18
 Class: EEEE-346-01
 Assignment: Project 3
 
-Purpose:
- 
+Purpose:Describes functions declared in Sinusoid.h
 */
 
 #include <iostream>
 #include <cmath>
 #include "Sinusoid.h"
 
-
-void Sinusoid::set_amp(double a, double b){
-    amp=0.5*(a/b);
+//constructors
+Sinusoid::Sinusoid() {
+	amplitude = 1;
+	period = 1;
+	phase = 0;
+	offset = 0;
+}
+Sinusoid::Sinusoid(int a, int b, int c, int d) {
+	amplitude = a;
+	period = b;
+	phase = c;
+	offset = d;
 }
 
+//getters
 double Sinusoid::get_amp(){
-    return amp;
+    return amplitude;
 }
-
 double Sinusoid::get_per(){
-    return per;
+    return period;
 }
-
-void Sinusoid::set_per(double c){
-    per = c;
-}
-
 double Sinusoid::get_phase(){
     return phase;
 }
+double Sinusoid::get_off() {
+	return offset;
+}
 
+//setters
+void Sinusoid::set_amp(double a, double b) {
+	amplitude = 0.5*(a / b);
+}
+void Sinusoid::set_per(double c) {
+	period = c;
+}
 void Sinusoid::set_phase(double d){
     phase=d;
 }
+void Sinusoid::set_off(double o) {
+	offset = o;
+}
 
+//actual sine function
 double Sinusoid::func(double t){
-    return amp*sin(per*t+phase);
+    return (amplitude*sin(period*t+phase) + offset);
 }
 
 
