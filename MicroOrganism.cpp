@@ -13,9 +13,9 @@ Purpose: derived class for organisms in micro-enviornments
 #include "MicroOrganism.h"
 
 Point_3D MicroOrganism::getLocation() {
-	return p3;
+	return l;
 }
 
 void MicroOrganism::setLocation(double x_new, double y_new, double z_new){
-	p3.setCoordinates(x_new, y_new, z_new);
+	l.setCoordinates(x_new, y_new, z_new);
 }

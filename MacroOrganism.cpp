@@ -8,16 +8,14 @@ Assignment: Project 3
 Purpose: derived class for organisms in micro-enviornments
 
 */
-#pragma once
+#include "MacroOrganism.h"
 
-#include "Organism.h"
-#include "Point_3D.h"
+Point MacroOrganism::getLocation()
+{
+	return l;
+}
 
-class MicroOrganism :public Organism {
-	protected:
-		Point_3D l;
-	public:
-	
-	Point_3D getLocation();
-	void setLocation(double x_new, double y_new, double z_new);
-};
+void MacroOrganism::setLocation(int x_new, int y_new) {
+	l.setCoordinates(x_new, y_new);
+}
+
