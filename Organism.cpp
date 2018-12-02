@@ -28,7 +28,7 @@ int Organism::get_age() {
 	return age;
 }
 double Organism::get_movement() {
-	return age;
+	return movement;
 }
 double Organism::get_spawn_distance() {
 	return spawn_distance;
