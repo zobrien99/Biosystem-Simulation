@@ -26,7 +26,9 @@ class Environment{
 	  double getMax_temp();
     	  void setMax_temp(double);
     	  void setMin_temp(double);
-    	  double getMin_temp();	
+    	  double getMin_temp();
+	  void set_time(int);
+	  int get_time();
 
 };
 

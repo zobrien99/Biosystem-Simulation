@@ -19,10 +19,11 @@ class Organism{
 		 int reproduction_amount;
 		 int reproduction_time;
 		 int age;
+		 double movement;
+		 double spawn_distance;
 
 	public:
 		//abstract functions, must be defined in inherited classes
-		 virtual void eat() const = 0; 
 		 virtual void reproduce() const = 0;
 
 		 //getters
@@ -31,6 +32,8 @@ class Organism{
 		 virtual int get_rep_amount();
 		 virtual int get_rep_time();
 		 virtual int get_age();
+		 virtual double get_movement();
+		 virtual double get_spawn_distance();
 
 		 //setters
 		 virtual void set_con_amount(int x);
@@ -38,5 +41,7 @@ class Organism{
 		 virtual void set_rep_amount(int x);
 		 virtual void set_rep_time(int x);
 		 virtual void set_age(int x);
+		 virtual void set_movement(double x);
+		 virtual void set_spawn_distance(double x);
 
 };

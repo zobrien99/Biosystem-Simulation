@@ -5,18 +5,21 @@ Date: 12/1/18
 Class: EEEE-346-01
 Assignment: Project 3
 
-Purpose: derived class for organisms in micro-enviornments
+Purpose: derived class for organisms in macro-enviornments
 
 */
+
 #pragma once
 
 #include "Organism.h"
-#include "Point_3D.h"
+#include "Point.h"
 
-class MicroOrganism :public Organism {
+class MacroOrganism :public Organism {
+
 	protected:
-		Point_3D l;
+		Point l;
 	public:
-		Point_3D getLocation();
-		void setLocation(double x_new, double y_new, double z_new);
+		Point getLocation();
+		void setLocation(int x_new, int y_new);
+
 };
