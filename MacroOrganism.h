@@ -16,10 +16,10 @@ Purpose: derived class for organisms in macro-enviornments
 
 class MacroOrganism :public Organism {
 
-protected:
-	Point l;
-public:
-	Point getLocation();
-	void setLocation(int x_new, int y_new);
+	protected:
+		Point l;
+	public:
+		Point getLocation();
+		void setLocation(int x_new, int y_new);
 
 };
