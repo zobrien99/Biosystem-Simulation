@@ -24,11 +24,13 @@ class Environment{
 
   public:
 	  double getMax_temp();
-    	  void setMax_temp(double);
-    	  void setMin_temp(double);
-    	  double getMin_temp();
+      void setMax_temp(double);
+      void setMin_temp(double);
+	  double getMin_temp();
 	  void set_time(int);
 	  int get_time();
+
+	  Environment(double temp = 50, int t = 10, double max_t = 75, double min_t = 25);
 
 };
 
