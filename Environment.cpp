@@ -1,4 +1,5 @@
-/* 
+#include "Environment.h"
+/*
 Authors: Andrew Yoder, Thomas Stryjski, Zachary O'Brien
 Email: aby7159@rit.edu, tgs9181@rit.edu, zjo5244@rit.edu
 Date: 12/1/18
@@ -28,6 +29,13 @@ double Environment::getMin_temp(){
 
 int Environment::get_time(){
     return time;
+}
+
+Environment::Environment(double temp, int t, double max_t, double min_t){
+	temperature = temp;
+	time = t;
+	max_temp = max_t;
+	min_temp = min_t;
 }
 
 
