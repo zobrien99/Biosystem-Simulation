@@ -1,0 +1,27 @@
+rock64@rock64:~/Desktop/Biosystem_Simulation-2$ g++ Environment.cpp MacroOrganism.cpp Main.cpp MicroOrganism.cpp Organism.cpp Point.cpp Point_3D.cpp Sinusoid.cpp
+Main.cpp: In function 'int main()':
+Main.cpp:40:27: error: cannot declare variable 'plc' to be of abstract type 'MicroOrganism'
+             MicroOrganism plc;
+                           ^~~
+In file included from Main.cpp:6:0:
+MicroOrganism.h:16:7: note:   because the following virtual functions are pure within 'MicroOrganism':
+ class MicroOrganism :public Organism {
+       ^~~~~~~~~~~~~
+In file included from MacroOrganism.h:14:0,
+                 from Main.cpp:5:
+Organism.h:27:17: note: 	virtual void Organism::reproduce() const
+    virtual void reproduce() const = 0;
+                 ^~~~~~~~~
+Main.cpp:44:27: error: cannot declare variable 'plc' to be of abstract type 'MacroOrganism'
+             MacroOrganism plc;
+                           ^~~
+In file included from Main.cpp:5:0:
+MacroOrganism.h:17:7: note:   because the following virtual functions are pure within 'MacroOrganism':
+ class MacroOrganism :public Organism {
+       ^~~~~~~~~~~~~
+In file included from MacroOrganism.h:14:0,
+                 from Main.cpp:5:
+Organism.h:27:17: note: 	virtual void Organism::reproduce() const
+    virtual void reproduce() const = 0;
+                 ^~~~~~~~~
+
