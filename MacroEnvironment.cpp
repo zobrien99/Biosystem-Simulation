@@ -9,6 +9,7 @@ Purpose: Class for ennvorments on macroscopic scale;
 */
 
 #include "MacroEnvironment.h"
+#include "MacroOrganism.h"
 
 MacroEnvironment::MacroEnvironment(double temp = 50, int t = 10, double max_t = 75, double min_t = 25, double x = 50, double y = 50) {
 	Environment(temp, t, max_t, min_t);
@@ -32,8 +33,8 @@ void MacroEnvironment::setBounds(double x, double y) {
 }
 
 bool MacroEnvironment::within_bounds(MacroOrganism &O) {
-	double x_cord = O.getLocation.getX();
-	double y_cord = O.getLocation.getY();
+	double x_cord = O.getLocation().getX();
+	double y_cord = O.getLocation().getY();
 	
 	if ((x_cord > x_max) || (x_cord < -(x_max)))
 		return false;

@@ -23,6 +23,6 @@ class MacroEnvironment : public Environment {
 		bool within_bounds(MacroOrganism &O);
 	
 	public:
-		MacroEnvironment(double temp = 50, int t = 10, double max_t = 75, double min_t = 25, double x = 50, double y = 50);
+		MacroEnvironment(double temp, int t, double max_t, double min_t, double x, double y);
 		void setBounds(double x, double y);
 };

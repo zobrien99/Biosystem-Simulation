@@ -38,9 +38,9 @@ void MicroEnvironment::setBounds(double x, double y,double z) {
 }
 
 bool MicroEnvironment::within_bounds(MicroOrganism &O) {
-	double x_cord = O.getLocation.getX();
-	double y_cord = O.getLocation.getY();
-	double z_cord = O.getLocation.getZ();
+	double x_cord = O.getLocation().getX();
+	double y_cord = O.getLocation().getY();
+	double z_cord = O.getLocation().getZ();
 	if ((x_cord > x_max) || (x_cord < -(x_max)))
 		return false;
 	if ((y_cord > y_max) || (y_cord < -(y_max)))
