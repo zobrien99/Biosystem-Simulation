@@ -13,7 +13,7 @@ Purpose: Provides the interface to take in data and return the results.
 #include "Environment.h"
 #include "MacroOrganism.h"
 #include "MicroOrganism.h"
-#include "Point_3D."
+#include "Point_3D.h"
 #include "Point.h"
 
 using namespace std;
@@ -23,7 +23,7 @@ int main(){
     int numobj, cont, cond, pop, numenv, t;
     double x;
     
-    cout << "Welcome to the Biosystem Simulation program \n";    
+    cout << "Welcome to the Biosystem Simulation program \n\n";    
     cout << "Enter number of different animals to simulate\n";
     
     cin >> numobj;
