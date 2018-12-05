@@ -13,8 +13,7 @@ Purpose: derived class for microorganisms; chemotroph/phototroph
 
 class Bacteria :public MicroOrganism {
 
-	protected:
-		double 
+	protected: 
 		double sunlight;
 		double chemical;
 		double fertility;
