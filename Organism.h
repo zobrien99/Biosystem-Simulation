@@ -21,6 +21,7 @@ class Organism{
 		 int age;
 		 double movement;
 		 double spawn_distance;
+		 double visibility;
 
 	public:
 		//abstract functions, must be defined in inherited classes
@@ -34,6 +35,7 @@ class Organism{
 		 virtual int get_age();
 		 virtual double get_movement();
 		 virtual double get_spawn_distance();
+		 virtual double get_visibility();
 
 		 //setters
 		 virtual void set_con_amount(int x);
@@ -43,5 +45,6 @@ class Organism{
 		 virtual void set_age(int x);
 		 virtual void set_movement(double x);
 		 virtual void set_spawn_distance(double x);
+		 virtual void set_visibility(double x);
 
 };
