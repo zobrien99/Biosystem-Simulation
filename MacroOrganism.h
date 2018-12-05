@@ -20,6 +20,8 @@ class MacroOrganism :public Organism {
 		Point l;
 	public:
 		Point getLocation();
-		void setLocation(int x_new, int y_new);
-
+		void setLocation(double x_new, double y_new);
+		void setLocation(Point p);
+		
+		double operator-(MacroOrganism &O);
 };
