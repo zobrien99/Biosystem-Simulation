@@ -9,6 +9,7 @@ Purpose: Class for ennvorments on macroscopic scale;
 */
 
 #include "MacroEnvironment.h"
+#include "MacroOrganism.h"
 
 MacroEnvironment::MacroEnvironment(double temp = 50, int t = 10, double max_t = 75, double min_t = 25, double x = 50, double y = 50) {
 	Environment(temp, t, max_t, min_t);
