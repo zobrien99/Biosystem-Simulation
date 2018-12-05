@@ -32,6 +32,9 @@ double Organism::get_movement() {
 double Organism::get_spawn_distance() {
 	return spawn_distance;
 }
+double Organism::get_visibility() {
+	return visibility;
+}
 
 //setters
 void Organism::set_con_amount(int x) {
@@ -54,4 +57,7 @@ void Organism::set_movement(double x) {
 }
 void Organism::set_spawn_distance(double x) {
 	spawn_distance = x;
+}
+void Organism::set_visibility(double x) {
+	visibility = x;
 }
