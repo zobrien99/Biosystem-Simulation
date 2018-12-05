@@ -9,7 +9,6 @@ Purpose: Executes functions declared in Organism.h
 */
 
 #include "Organism.h"
-#pragma once
 
 //getters
 int Organism::get_con_amount() {
