@@ -31,6 +31,11 @@ int Environment::get_time(){
     return time;
 }
 
+int Environment::get_run_to_time()
+{
+	return run_to_time;
+}
+
 Environment::Environment(double temp, int t, double max_t, double min_t){
 	temperature = temp;
 	time = t;
@@ -52,5 +57,9 @@ void Environment::set_time(int c){
     time=c;
 }
 
+void Environment::set_run_to_time(int t)
+{
+	run_to_time = t;
+}
 
 
