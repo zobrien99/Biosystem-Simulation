@@ -7,9 +7,9 @@ Assignment: Project 3
 
 Purpose: derived class for microorganisms; chemotroph/phototroph
 */
-#pragma once
-
 #include "MicroOrganism.h"
+#include <cstdlib>
+#pragma once
 
 class Bacteria :public MicroOrganism {
 
@@ -20,10 +20,10 @@ class Bacteria :public MicroOrganism {
 		
 	public:
 		//constructors
-		Bacteria();//only destructors
+		Bacteria(double x, double y, double z);
 
 		//getters
-		
+		//none needed
 
 		//setters
 		void set_sunlight(double x);
@@ -32,7 +32,8 @@ class Bacteria :public MicroOrganism {
 
 		//other
 		void reproduce();
-		void aged();
+		void aged(int AGE);
+		double fRand(double fMin, double fMax);
 	
 
 };
