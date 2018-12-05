@@ -33,8 +33,8 @@ void MacroEnvironment::setBounds(double x, double y) {
 }
 
 bool MacroEnvironment::within_bounds(MacroOrganism &O) {
-	double x_cord = O.getLocation.getX();
-	double y_cord = O.getLocation.getY();
+	double x_cord = O.getLocation().getX();
+	double y_cord = O.getLocation().getY();
 	
 	if ((x_cord > x_max) || (x_cord < -(x_max)))
 		return false;
