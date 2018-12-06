@@ -19,6 +19,7 @@ class Environment{
   protected:
 	  double temperature;
 	  int time;
+	  int run_to_time;
 	  double max_temp;
 	  double min_temp;
 
@@ -29,6 +30,8 @@ class Environment{
 	  double getMin_temp();
 	  void set_time(int);
 	  int get_time();
+	  void set_run_to_time(int);
+	  int get_run_to_time();
 
 	  Environment(double temp = 50, int t = 10, double max_t = 75, double min_t = 25);
 

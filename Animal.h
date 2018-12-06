@@ -5,35 +5,34 @@ Date: 12/1/18
 Class: EEEE-346-01
 Assignment: Project 3
 
-Purpose: derived class for microorganisms; chemotroph/phototroph
+Purpose: derived class for macroorganisms; herbivore?
 */
-#include "MicroOrganism.h"
-#include <cstdlib>
+
+#include "MacroOrganism.h"
+#include <cmath>
 #pragma once
 
-class Bacteria :public MicroOrganism {
 
-	protected: 
-		double sunlight;
-		double chemical;
+class Animal: public MacroOrganism{
+	protected:
+		double co2 = 2;
+		double o2;
 		double fertility;
-		
+
 	public:
 		//constructors
-		Bacteria(double x, double y, double z);
+		Animal(double x, double y, double z);
 
 		//getters
-		//none needed
+		void get_co2(double x);
 
 		//setters
-		void set_sunlight(double x);
-		void set_chemical(double x);
+		void set_o2(double x);
 		void set_fertility(); //determines reproduction values as a function of temperature and sunlight
 
 		//other
 		void reproduce();
 		void aged(int AGE);
 		double fRand(double fMin, double fMax);
-	
-
 };
+

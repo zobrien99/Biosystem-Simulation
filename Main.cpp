@@ -11,8 +11,8 @@ Purpose: Provides the interface to take in data and return the results.
 #include <iostream>
 #include <string>
 #include "Environment.h"
-#include "MacroOrganism.h"
-#include "MicroOrganism.h"
+#include "Bacteria.h"
+#include "Animal.h"
 #include "Point_3D.h"
 #include "Point.h"
 
@@ -46,11 +46,11 @@ int main(){
         
         
         if (cond = 1){
-            MicroOrganism plc;
+            Bacteria plc;
         }
         
         if (cond = 2){
-            MacroOrganism plc;
+            Animal plc;
         }
         
         cout << "Enter 1 to continue creating animals or 0 quit: ";
@@ -69,8 +69,7 @@ int main(){
         
         cout << "Enter 1 for microenvironment or 2 for macroenvironment: ";
         cin >> cond;
-        cout << "Enter animal population: ";
-        cin >> pop;
+
         
         
         
