@@ -21,7 +21,7 @@ class Animal: public MacroOrganism{
 
 	public:
 		//constructors
-		Animal(double x, double y, double z);
+		Animal(double x, double y);
 
 		//getters
 		void get_co2(double x);
