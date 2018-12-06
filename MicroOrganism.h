@@ -19,4 +19,7 @@ class MicroOrganism :public Organism {
 	public:
 		Point_3D getLocation();
 		void setLocation(double x_new, double y_new, double z_new);
+		void setLocation(Point_3D p);
+
+		double operator-(MicroOrganism &O);
 };
