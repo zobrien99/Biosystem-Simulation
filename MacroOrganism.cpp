@@ -25,8 +25,8 @@ void MacroOrganism::setLocation(Point p) {
 
 double MacroOrganism::operator-(MacroOrganism & O){
 	double delta_x, delta_y, result;
-	delta_x = l.getX() - O.getLocation.getX();
-	delta_y = l.getY() - O.getLocation.getY();
+	delta_x = l.getX() - O.getLocation().getX();
+	delta_y = l.getY() - O.getLocation().getY();
 
 	result = sqrt( pow(delta_x,2.0) + pow(delta_y,2.0));
 	return result;
