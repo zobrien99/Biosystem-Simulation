@@ -25,7 +25,7 @@ class Organism{
 
 	public:
 		//abstract functions, must be defined in inherited classes
-		 virtual void reproduce();
+		 virtual void reproduce()=0;
 
 		 //getters
 		 int get_con_amount();
