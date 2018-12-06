@@ -69,8 +69,7 @@ int main(){
         
         cout << "Enter 1 for microenvironment or 2 for macroenvironment: ";
         cin >> cond;
-        cout << "Enter animal population: ";
-        cin >> pop;
+
         
         
         
