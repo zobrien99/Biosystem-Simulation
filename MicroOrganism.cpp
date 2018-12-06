@@ -29,9 +29,9 @@ double MicroOrganism::operator-(MicroOrganism & O)
 {
 	double delta_x, delta_y, delta_z, result;
 
-	delta_x = l.getX() - O.getLocation.getX();
-	delta_y = l.getY() - O.getLocation.getY();
-	delta_z = l.getZ() - O.getLocation.getZ();
+	delta_x = l.getX() - O.getLocation().getX();
+	delta_y = l.getY() - O.getLocation().getY();
+	delta_z = l.getZ() - O.getLocation().getZ();
 
 	result = sqrt(pow(delta_x, 2.0) + pow(delta_y, 2.0) + pow(delta_z, 2.0));
 	return result;
