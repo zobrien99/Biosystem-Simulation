@@ -25,7 +25,7 @@ Animal::Animal(double x, double y) {
 }
 
 //getters
-void Animal::get_co2(double x) {
+double Animal::get_co2() {
 	return co2;
 }
 
@@ -34,12 +34,12 @@ void Animal::set_o2(double x) {
 	o2 = x;
 }
 void Animal::set_fertility() {
-	fertility = 1 + ((o2 / 5) - 1));
+	fertility = (1 + ((o2 / 5) - 1));
 }
 
 //other
 void Animal::reproduce() {
-	for (int x = 0; x <= int(reproduction_amount * fertility); x++) {
+	for (int i = 0; i <= int(reproduction_amount * fertility); i++) {
 		double theta = fRand(0, 2 * 3.14159265);
 
 		double x = spawn_distance * cos(theta);
