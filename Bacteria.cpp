@@ -9,6 +9,7 @@ Purpose: Executes functions declared in Bacteria.h
 */
 
 #include "Bacteria.h"
+#include <cmath>
 
 
 //constructors

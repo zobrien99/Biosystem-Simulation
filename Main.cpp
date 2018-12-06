@@ -46,11 +46,11 @@ int main(){
         
         
         if (cond = 1){
-            Bacteria plc;
+            Bacteria plc(0,0,0);
         }
         
         if (cond = 2){
-            Animal plc;
+            Animal plc(0,0,0);
         }
         
         cout << "Enter 1 to continue creating animals or 0 quit: ";
