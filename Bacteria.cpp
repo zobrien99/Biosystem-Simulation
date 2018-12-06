@@ -10,7 +10,6 @@ Purpose: Executes functions declared in Bacteria.h
 
 #include "Bacteria.h"
 
-#pragma once
 
 //constructors
 Bacteria::Bacteria(double x, double y, double z) {
@@ -41,6 +40,12 @@ void Bacteria::set_fertility() {
 }
 
 //other
+
+double fRand(double fMin, double fMax) {
+	double f = (double)rand() / RAND_MAX;
+	return fMin + f * (fMax - fMin);
+}
+
 void Bacteria::reproduce() {
 	double theta = fRand(0, 2 * 3.14159265);
 	double phi = fRand(0, 2 * 3.14159265);
@@ -55,8 +60,4 @@ void Bacteria::reproduce() {
 void Bacteria::aged(int a) {
 	movement = movement - (a/20); //decereases movement the older the cell is, although this is scaled by the constant 10. Accumulates
 	spawn_distance = 4 - (a / 100);//decreases spawn distance as the cell gets older, scaled by the constant 100. Acculmulates
-}
-double fRand(double fMin, double fMax) {
-	double f = (double)rand() / RAND_MAX;
-	return fMin + f * (fMax - fMin);
 }
