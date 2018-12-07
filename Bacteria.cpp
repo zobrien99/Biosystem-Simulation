@@ -42,7 +42,7 @@ void Bacteria::set_fertility() {
 
 //other
 
-double fRand(double fMin, double fMax) {
+double Bacteria::fRand(double fMin, double fMax) {
 	double f = (double)rand() / RAND_MAX;
 	return fMin + f * (fMax - fMin);
 }
