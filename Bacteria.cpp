@@ -47,7 +47,7 @@ double Bacteria::fRand(double fMin, double fMax) {
 	return fMin + f * (fMax - fMin);
 }
 
-void Bacteria::reproduce() {
+void Bacteria::reproduce(Organism *O) {
 	double theta = fRand(0, 2 * 3.14159265);
 	double phi = fRand(0, 2 * 3.14159265);
 
@@ -55,7 +55,7 @@ void Bacteria::reproduce() {
 	double y = spawn_distance * cos(phi) * sin(theta);
 	double z = spawn_distance * sin(phi);
 
-	Bacteria(x, y, z);
+	O = new Bacteria(x, y, z);
 
 }
 void Bacteria::aged(int a) {
