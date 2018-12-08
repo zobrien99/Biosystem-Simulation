@@ -38,6 +38,7 @@ void Plant::set_fertility() {
 }
 
 //other
+
 void Plant::reproduce(Organism *O) {
 	for (int i = 0; i <= int(reproduction_amount * fertility); i++) {
 		double theta = fRand(0, 2 * 3.14159265);

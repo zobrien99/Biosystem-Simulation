@@ -42,7 +42,7 @@ double Sinusoid::get_off() {
 
 //setters
 void Sinusoid::set_amp(double a, double b) {
-	amplitude = 0.5*(a / b);
+	amplitude = 0.5*(a - b);
 }
 void Sinusoid::set_per(double c) {
 	period = c;
