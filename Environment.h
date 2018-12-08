@@ -13,6 +13,7 @@ serve as the base definition for the climates.
 
 #pragma once
 #include <vector>
+#include "Sinusoid.h"
 
 class Environment{
   
