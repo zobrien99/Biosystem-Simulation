@@ -16,27 +16,34 @@ serve as the base definition for the climates.
 #include "Sinusoid.h"
 
 class Environment{
-  
-  protected:
-	  double temperature;
-	  int time;
-	  int run_to_time;
-	  double max_temp;
-	  double min_temp;
-	  Sinusoid temp;
 
-  public:
-	  double getMax_temp();
-      void setMax_temp(double);
-      void setMin_temp(double);
-	  double getMin_temp();
-	  void set_time(int);
-	  int get_time();
-	  void set_run_to_time(int);
-	  int get_run_to_time();
+	protected:
+		//time
+		int time;
+		int run_to_time;
 
-	  Environment(double temp = 50, int t = 10, double max_t = 75, double min_t = 25);
+		//temperature
+		double temperature;
+		double max_temp;
+		double min_temp;
+		Sinusoid temp;
 
+	public:
+		//constructors
+		Environment();
+		Environment(int t, double temp, double min_t, double max_t);
+
+		//getters
+		int get_time();
+		int get_run_to_time();
+		double getMin_temp();
+		double getMax_temp();
+
+		//setters
+		void set_time(int);
+		void set_run_to_time(int);
+		void setMin_temp(double);
+		void setMax_temp(double);
 };
 
 
