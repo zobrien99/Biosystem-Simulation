@@ -11,11 +11,18 @@ Purpose: Class for ennvorments on macroscopic scale;
 #include "MacroEnvironment.h"
 #include "MacroOrganism.h"
 
-MacroEnvironment::MacroEnvironment(double temp = 50, int t = 10, double max_t = 75, double min_t = 25, double x = 50, double y = 50) {
+//constructors
+MacroEnvironment::MacroEnvironment() {
+	Environment();
+	x_max = 50;
+	y_max = 50;
+}
+MacroEnvironment::MacroEnvironment(int t, double temp, double min_t, double max_t, double x, double y){
 	Environment(temp, t, max_t, min_t);
 	setBounds(x, y);
 }
 
+//setters
 void MacroEnvironment::setBounds(double x, double y) {
 	if (x > 0)
 		x_max = x;
@@ -32,6 +39,7 @@ void MacroEnvironment::setBounds(double x, double y) {
 		y_max = 50;
 }
 
+//others
 bool MacroEnvironment::within_bounds(MacroOrganism &O) {
 	double x_cord = O.getLocation().getX();
 	double y_cord = O.getLocation().getY();
