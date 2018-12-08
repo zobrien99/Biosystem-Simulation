@@ -25,7 +25,7 @@ Animal::Animal(double x, double y) {
 }
 
 //getters
-double Animal::get_co2(double x) {
+double Animal::get_co2() {
 	return co2;
 }
 
