@@ -38,14 +38,14 @@ void Animal::set_fertility() {
 }
 
 //other
-void Animal::reproduce() {
+void Animal::reproduce(Organism *O) {
 	for (int i = 0; i <= int(reproduction_amount * fertility); i++) {
 		double theta = fRand(0, 2 * 3.14159265);
 
 		double x = spawn_distance * cos(theta);
 		double y = spawn_distance * sin(theta);
 
-		Animal(x, y);
+		O = new Animal(x, y);
 	}
 }
 void Animal::aged(int a) {
