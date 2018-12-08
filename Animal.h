@@ -15,7 +15,7 @@ Purpose: derived class for macroorganisms; herbivore?
 
 class Animal: public MacroOrganism{
 	protected:
-		double co2 = 2;
+		double co2 = 1;
 		double o2;
 		double fertility;
 
@@ -24,7 +24,7 @@ class Animal: public MacroOrganism{
 		Animal(double x, double y);
 
 		//getters
-		double get_co2();
+		double get_co2(double x);
 
 		//setters
 		void set_o2(double x);

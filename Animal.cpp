@@ -25,7 +25,7 @@ Animal::Animal(double x, double y) {
 }
 
 //getters
-double Animal::get_co2() {
+double Animal::get_co2(double x) {
 	return co2;
 }
 
@@ -34,7 +34,7 @@ void Animal::set_o2(double x) {
 	o2 = x;
 }
 void Animal::set_fertility() {
-	fertility = (1 + ((o2 / 5) - 1));
+	fertility = 1 + ((o2 / 5) - 1);
 }
 
 //other
