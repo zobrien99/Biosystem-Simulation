@@ -14,8 +14,6 @@ Purpose:
 #include "Environment.h"
 #include "Sinusoid.h"
 
-Sinusoid temp;
-
 
 
 // getters
@@ -36,11 +34,15 @@ int Environment::get_run_to_time()
 	return run_to_time;
 }
 
-Environment::Environment(double temp, int t, double max_t, double min_t){
-	temperature = temp;
+Environment::Environment(double new_temp, int t, double max_t, double min_t){
+	temperature = new_temp;
 	time = t;
 	max_temp = max_t;
 	min_temp = min_t;
+	
+	double amplitude = (max_temp - min_temp) / 2;
+	double center = (max_temp + min_temp) / 2;
+	temp(amplitude, 10.0, 0.0, center;
 }
 
 

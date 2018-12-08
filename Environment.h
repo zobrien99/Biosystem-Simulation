@@ -22,6 +22,7 @@ class Environment{
 	  int run_to_time;
 	  double max_temp;
 	  double min_temp;
+	  Sinusoid temp;
 
   public:
 	  double getMax_temp();
