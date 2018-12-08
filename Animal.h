@@ -24,7 +24,7 @@ class Animal: public MacroOrganism{
 		Animal(double x, double y);
 
 		//getters
-		double get_co2(double x);
+		double get_co2();
 
 		//setters
 		void set_o2(double x);
