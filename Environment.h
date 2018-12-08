@@ -13,6 +13,7 @@ serve as the base definition for the climates.
 
 #pragma once
 #include <vector>
+#include "Sinusoid.h"
 
 class Environment{
   
@@ -22,6 +23,7 @@ class Environment{
 	  int run_to_time;
 	  double max_temp;
 	  double min_temp;
+	  Sinusoid temp;
 
   public:
 	  double getMax_temp();
