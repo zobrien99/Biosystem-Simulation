@@ -21,90 +21,78 @@ using namespace std;
 
 int main(){
     
-    int numobj, cond, pop, numenv, t;
+    int cond, pop, numenv, t;
     double x, macEnv_x, macEnv_y, ani_x, ani_y, micEnv_x, micEnv_y; 
     double micEnv_z, bac_x, bac_y, bac_z;
     vector<Animal> anim;
+    vector<Bacteria> bact;
     
     
     cout << "Welcome to the Biosystem Simulation program \n\n";    
-    cout << "Enter number of different organisms to simulate\n";
-    
-    cin >> numobj;   
+  
     
     cout << "Enter 1 to simulate macroorganisms or 2 to simulate microorganisms: ";
     cin >> cond;
    
     if (cond = 1){
-        
-        for (int i=0; i<numobj; ++i){
-            
-            MacroEnvironment macEnv;
-            
-            cout << "Enter x size of Environment: ";
-            cin >> macEnv_x;
-            cout << "Enter y size of Environment: ";
-            cin >> macEnv_y;
-            macEnv.setBounds(macEnv_x, macEnv_y);
-               
+        MacroEnvironment macEnv;
+        cout << "Enter x size of Environment: ";
+        cin >> macEnv_x;
+        cout << "Enter y size of Environment: ";
+        cin >> macEnv_y;
+        macEnv.setBounds(macEnv_x, macEnv_y);               
 
-            cout << "Enter animal population: ";
-            cin >> pop;
-            for (int i=0; i<pop; ++i){
-                Animal asd;
-                cout << "Enter animal x location: ";
-                cin >> ani_x;
-                cout << "Enter animal y location: ";
-                cin >> ani_y;
-                asd.Animal(ani_x, ani_y);
-            }
-                
-            cout << "Enter time for simulation: ";
-            cin >> t;       
+        cout << "Enter animal population: ";
+        cin >> pop;
         
-
-        
+        for (int i=0; i<pop; ++i){
+            Animal asd;
+            cout << "Enter animal x location: ";
+            cin >> ani_x;
+            cout << "Enter animal y location: ";
+            cin >> ani_y;
+            asd.Animal(ani_x, ani_y);
+            anim.push_back(asd);
         }
+                
+        cout << "Enter time for simulation: ";
+        cin >> t;        
+        
     }
     
     
     if (cond = 2){
-        
-        for (int i=0; i<numobj; ++i){
             
-            MicroEnvironment micEnv;
+        MicroEnvironment micEnv;
             
-            cout << "Enter x size of Environment: ";
-            cin >> micEnv_x;
-            cout << "Enter y size of Environment: ";
-            cin >> micEnv_y;
-            cout << "Enter z size of Environment: ";
-            cin >> micEnv_z;
-            micEnv.setBounds(micEnv_x, micEnv_y, micEnv_z);
+        cout << "Enter x size of Environment: ";
+        cin >> micEnv_x;
+        cout << "Enter y size of Environment: ";
+        cin >> micEnv_y;
+        cout << "Enter z size of Environment: ";
+        cin >> micEnv_z;
+        micEnv.setBounds(micEnv_x, micEnv_y, micEnv_z);
                
 
-            cout << "Enter microorganism population: ";
-            cin >> pop;
-            for (int i=0; i<pop; ++i){
-                Bacteria asd;
-                cout << "Enter bacteria x location: ";
-                cin >> bac_x;
-                cout << "Enter bacteria y location: ";
-                cin >> bac_y;
-                cout << "Enter bacteria z location: ";
-                cin >> bac_z;
-                asd.Bacteria(bac_x, bac_y, bac_z);
-            }
-                
-            cout << "Enter time for simulation: ";
-            cin >> t;       
-        
-
-        
+        cout << "Enter microorganism population: ";
+        cin >> pop;
+            
+        for (int i=0; i<pop; ++i){
+            Bacteria asd;
+            cout << "Enter bacteria x location: ";
+            cin >> bac_x;
+            cout << "Enter bacteria y location: ";
+            cin >> bac_y;
+            cout << "Enter bacteria z location: ";
+            cin >> bac_z;
+            asd.Bacteria(bac_x, bac_y, bac_z);
+            bact.push_back(asd);
         }
-    
-    
-    }
+                
+        cout << "Enter time for simulation: ";
+        cin >> t; 
+        
+    }   
     
 }
    
