@@ -14,16 +14,40 @@ Purpose: Class for ennvorments on macroscopic scale;
 
 //constructors
 MacroEnvironment::MacroEnvironment() {
-	Environment();
-	x_max = 50;
-	y_max = 50;
+	//Environment();
+
+	//
+	run_to_time = 10;
+	min_temp = 0;
+	max_temp = 100;
+	time = 0;
+
+	double amplitude = (max_temp - min_temp) / 2;
+	double center = (max_temp + min_temp) / 2;
+	temp(amplitude, 10.0, 0.0, center);
+	//
+
+
+	setBounds(50, 50);
 	animals = new vector <Animal> (10);
 	plants = new vector <Plant> (10);
 	spawn_animals();
 	spawn_plants();
 }
-MacroEnvironment::MacroEnvironment(int t, double temp, double min_t, double max_t, double x, double y,int num_animals, int num_plants){
-	Environment(temp, t, max_t, min_t);
+MacroEnvironment::MacroEnvironment(int t, double min_t, double max_t, double x, double y,int num_animals, int num_plants){
+	//Environment(temp, t, max_t, min_t);
+	
+	//
+	run_to_time = t;
+	max_temp = max_t;
+	min_temp = min_t;
+	time = 0;
+
+	double amplitude = (max_temp - min_temp) / 2;
+	double center = (max_temp + min_temp) / 2;
+	temp(amplitude, 10.0, 0.0, center);
+	//
+
 	setBounds(x, y);
 	animals = new vector <Animal>(num_animals);
 	plants = new vector <Plant>(num_plants);
@@ -87,9 +111,31 @@ int MacroEnvironment::plant_pop() {
 }
 
 void MacroEnvironment::event() {
-	for (int i = 0; i < animals.size(); i++) {
-		Animal *a;
-		animals[i].reproduce(a);
-		animals.push_back(a);
+	//Animal Actions
+	int animal_size = animals.size();
+	
+	for (int i = 0; i < animal_size; i++) {
+		if (animals[i].get_rep_counter() == 0) {
+			for (int j = 0; j < int(animals[i].get_rep_ammount() * animals[i].get_fertility()); j++) {
+				Animal *a;
+				animals[i].reproduce(a);
+				animals.push_back(*a);
+			}
+		}
+		animals[i].dec_rep_counter();
 	}
+	
+	//Plant Actions
+	int plant_size = plants.size();
+	for (int i = 0; i < plant_size; i++) {
+		if (plants[i].get_rep_counter() == 0) {
+			for (int j = 0; j < int(plants[i].get_rep_ammount() * plants[i].get_fertility()); j++) {
+				Plant *p;
+				plants[i].reproduce(p);
+				plants.push_back(*a);
+			}
+		}
+		plants[i].dec_rep_counter();
+	}
+
 }
