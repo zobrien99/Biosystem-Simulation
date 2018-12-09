@@ -30,4 +30,5 @@ public:
 	MicroEnvironment(double temp, int t, double max_t, double min_t, double x, double y, double z);
 	void setBounds(double x, double y, double z);
 
+	void event();
 };
