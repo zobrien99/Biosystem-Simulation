@@ -16,7 +16,7 @@ class Sinusoid{
     public:
 		//constructors
 		Sinusoid();
-		Sinusoid(int a, int p, int ph, int o);
+		Sinusoid(double a, double p, double ph, double o);
 
 		//getters
 		double get_amp();
