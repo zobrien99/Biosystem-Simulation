@@ -11,18 +11,30 @@ Purpose: Class for ennvorments on macroscopic scale;
 
 #include "Environment.h"
 #include "Animal.h"
+#include "Plant.h"
 
 using namespace std;
 class MacroEnvironment : public Environment {
 
 	private:
 		double x_max, y_max;
-		vector<Animal> *animals;
-//		vector<Plant> * plants;
+		vector<Animal> animals;
+		vector<Plant>  plants;
 
+		//others
 		bool within_bounds(MacroOrganism &O);
 	
+		void spawn_animals();
+		void spawn_plants();
+
 	public:
-		MacroEnvironment(double temp, int t, double max_t, double min_t, double x, double y);
+		//constructors
+		MacroEnvironment();
+		MacroEnvironment(int t, double temp, double min_t, double max_t, double x, double y,int num_animals, int num_plants);
+
+		//setters
 		void setBounds(double x, double y);
+		
+		int animal_pop();
+		int plant_pop();
 };

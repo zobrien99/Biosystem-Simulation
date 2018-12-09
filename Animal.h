@@ -31,7 +31,7 @@ class Animal: public MacroOrganism{
 		void set_fertility(); //determines reproduction values as a function of temperature and sunlight
 
 		//other
-		void reproduce();
+//		void reproduce();
 		void aged(int AGE);
 		double fRand(double fMin, double fMax);
 };
