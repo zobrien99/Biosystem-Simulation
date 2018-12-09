@@ -29,6 +29,10 @@ class Environment{
 		Sinusoid temp;
 
 	public:
+
+		//virtual functions
+		virtual void event() = 0;
+
 		//constructors
 		Environment();
 		Environment(int t, double temp, double min_t, double max_t);
