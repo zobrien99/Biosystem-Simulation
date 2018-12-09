@@ -29,6 +29,9 @@ int Organism::get_age() {
 int Organism::get_rep_counter() {
 	return reproduction_counter;
 }
+int Organism::get_strength() {
+	return strength;
+}
 double Organism::get_movement() {
 	return movement;
 }
@@ -55,6 +58,12 @@ void Organism::set_rep_time(int x) {
 void Organism::set_age(int x) {
 	age = x;
 }
+void Organism::set_rep_counter(int x) {
+	reproduction_counter = x;
+}
+void Organism::set_strenth(int x) {
+	strength = x;
+}
 void Organism::set_movement(double x) {
 	movement = x;
 }
@@ -64,9 +73,7 @@ void Organism::set_spawn_distance(double x) {
 void Organism::set_visibility(double x) {
 	visibility = x;
 }
-void Organism::set_rep_counter(double x) {
-	reproduction_counter = x;
-}
+
 
 void Organism::dec_rep_counter() {
 	if (reproduction_counter == 0)
