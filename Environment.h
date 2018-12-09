@@ -35,13 +35,14 @@ class Environment{
 
 		//constructors
 		Environment();
-		Environment(int t, double temp, double min_t, double max_t);
+		Environment(int t, double min_t, double max_t);
 
 		//getters
 		int get_time();
 		int get_run_to_time();
 		double getMin_temp();
 		double getMax_temp();
+		int get_temp();
 
 		//setters
 		void set_time(int);
