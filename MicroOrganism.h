@@ -22,4 +22,12 @@ class MicroOrganism :public Organism {
 		void setLocation(Point_3D p);
 
 		double operator-(MicroOrganism &O);
+
+		double delta_x(MicroOrganism &O);
+		double delta_y(MicroOrganism &O);
+		double delta_z(MicroOrganism &O);
+
+		double unit_x(MicroOrganism &O);
+		double unit_y(MicroOrganism &O);
+		double unit_z(MicroOrganism &O);
 };

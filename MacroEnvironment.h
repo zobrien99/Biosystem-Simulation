@@ -18,8 +18,8 @@ class MacroEnvironment : public Environment {
 
 	private:
 		double x_max, y_max;
-		vector<Animal> * animals;
-		vector<Plant>  * plants;
+		vector<Animal> animals;
+		vector<Plant> plants;
 
 		//others
 		bool within_bounds(MacroOrganism &O);
