@@ -26,6 +26,7 @@ public:
 
 	//getters
 	double get_o2();
+	double get_fertility();
 
 	//setters
 	void set_co2(double x);
