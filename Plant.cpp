@@ -29,6 +29,9 @@ Plant::Plant(double x, double y) {
 double Plant::get_o2() {
 	return o2;
 }
+double Plant::get_fertility() {
+	return fertility;
+}
 
 //setters
 void Plant::set_co2(double x) {

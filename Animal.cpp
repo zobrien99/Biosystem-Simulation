@@ -57,7 +57,7 @@ void Animal::aged() {
 	spawn_distance = 4 - (age / 100);//decreases spawn distance as the cell gets older, scaled by the constant 100. Acculmulates
 }
 Animal Animal::operator+(Plant *p) {
-	newLocation = p->getLocation();
+	Point newLocation = p->getLocation();
 	this->setLocation(newLocation);
 	delete p;
 	return *this;

@@ -9,6 +9,7 @@ Purpose: derived class for macroorganisms; herbivore?
 */
 
 #include "MacroOrganism.h"
+#include "Plant.h"
 #include <cmath>
 #pragma once
 

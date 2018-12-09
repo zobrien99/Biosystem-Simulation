@@ -24,7 +24,7 @@ void MacroOrganism::setLocation(Point p) {
 }
 
 double MacroOrganism::operator-(MacroOrganism & O){
-	double delta_x, delta_y, result;
+	double x, y, result;
 	x = delta_x(O);
 	y = delta_y(O);
 
