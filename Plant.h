@@ -33,7 +33,6 @@ public:
 	void set_fertility(); //determines reproduction values as a function of temperature and sunlight
 
 	//other
-	void reproduce();
-	void aged(int AGE);
-	double fRand(double fMin, double fMax);
+	void reproduce(Organism *O);
+	void aged();
 };

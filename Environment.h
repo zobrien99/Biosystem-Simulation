@@ -42,7 +42,7 @@ class Environment{
 		int get_run_to_time();
 		double getMin_temp();
 		double getMax_temp();
-		int get_temp();
+		double get_temp();
 
 		//setters
 		void set_time(int);
