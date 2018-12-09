@@ -8,7 +8,7 @@ Assignment: Project 3
 Purpose: Misclaneous Functions
 */
 
-#include "Miscellaneous.h";
+#include "Miscellaneous.h"
 
 double fRand(double fMin, double fMax) {
 	double f = (double)rand() / RAND_MAX;
