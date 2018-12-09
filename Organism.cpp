@@ -81,3 +81,6 @@ void Organism::dec_rep_counter() {
 	else
 		reproduction_counter--;
 }
+void Organism::deplete_strength() {
+	strength--;
+}

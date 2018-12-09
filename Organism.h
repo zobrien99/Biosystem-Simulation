@@ -56,4 +56,5 @@ class Organism{
 		 void set_visibility(double x);
 		 
 		 void dec_rep_counter();
+		 void deplete_strength();
 };

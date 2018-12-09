@@ -118,7 +118,6 @@ int MacroEnvironment::plant_pop() {
 
 void MacroEnvironment::event() {
 	int animal_size = animals.size();
-	int plant_size = plants.size();
 	//Animal Actions
 		//reproduce
 	for (int i = 0; i < animal_size; i++) {
@@ -134,24 +133,29 @@ void MacroEnvironment::event() {
 		//eat
 	Plant *closest, *temp;
 	double dist_temp, dist_closest;
+	int index;
 	for (int i = 0; i < animal_size; i++) {
 		dist_closest = animals[i] - plants[0];
 		closest = &plants[0];
-		for (int j = 0; j < plant_size; j++) {
+		index = 0;
+		for (int j = 0; j < plants.size(); j++) {
 			temp = &plants[j];
 			dist_temp = animals[i] - *temp;
 			if (dist_temp < dist_closest) {
 				dist_closest = dist_temp;
 				closest = temp;
+				index = j;
 			}
 		}
 		if (dist_closest <= animals[i].get_movement()) { //closest plant is within movement range
 			animals[i] + temp;
+			plants.erase(plants.begin()+index);
 		}
 		else if (dist_closest <= animals[i].get_visibility()) { // closest plant is within visability range
 			double new_x = animals[i].getLocation().getX() + animals[i].get_movement() * animals[i].unit_x(*temp);
 			double new_y = animals[i].getLocation().getY() + animals[i].get_movement() * animals[i].unit_y(*temp);
 			animals[i].setLocation(new_x, new_y);
+			animals[i].deplete_strength();
 		}
 		else { //plant is not within visibility range (randomly moves around);
 			double theta = fRand(0, 2 * 3.14159265);
@@ -160,11 +164,18 @@ void MacroEnvironment::event() {
 			double new_y = animals[i].getLocation().getY() + animals[i].get_movement() * sin(theta);
 
 			animals[i].setLocation(new_x, new_y);
+			animals[i].deplete_strength();
 		}
 	}
+	//kill weak animals
+	for (int i = 0; i < animals.size();) {
+		if (animals[i].get_strength() <= 0)
+			animals.erase(animals.begin + i);
+		else
+			i++;
+	}
 
-
-
+	int plant_size = plants.size();
 	//Plant Actions
 	
 	for (int i = 0; i < plant_size; i++) {

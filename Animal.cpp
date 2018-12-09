@@ -17,10 +17,13 @@ Animal::Animal(double x, double y) {
 	consumption_time = 5;
 	reproduction_amount = 2;
 	reproduction_time = 3;
+	reproduction_counter = reproduction_time;
 	age = 0;
+	strength = 3;
 	movement = 1;
 	spawn_distance = 4;
 	visibility = 2;
+
 
 	setLocation(x, y);
 }
@@ -59,6 +62,7 @@ void Animal::aged() {
 Animal Animal::operator+(Plant *p) {
 	Point newLocation = p->getLocation();
 	this->setLocation(newLocation);
-	delete p;
+	strength++;
+//	delete p;
 	return *this;
 }
