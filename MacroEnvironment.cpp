@@ -19,12 +19,16 @@ MacroEnvironment::MacroEnvironment() {
 	y_max = 50;
 	animals = new vector <Animal> (10);
 	plants = new vector <Plant> (10);
+	spawn_animals();
+	spawn_plants();
 }
 MacroEnvironment::MacroEnvironment(int t, double temp, double min_t, double max_t, double x, double y,int num_animals, int num_plants){
 	Environment(temp, t, max_t, min_t);
 	setBounds(x, y);
 	animals = new vector <Animal>(num_animals);
 	plants = new vector <Plant>(num_plants);
+	spawn_animals();
+	spawn_plants();
 }
 
 //setters
@@ -80,4 +84,12 @@ int MacroEnvironment::animal_pop() {
 
 int MacroEnvironment::plant_pop() {
 	return plants.size();
+}
+
+void MacroEnvironment::event() {
+	for (int i = 0; i < animals.size(); i++) {
+		Animal *a;
+		animals[i].reproduce(a);
+		animals.push_back(a);
+	}
 }
