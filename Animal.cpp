@@ -42,8 +42,8 @@ void Animal::reproduce(Organism *O) {
 	for (int i = 0; i <= int(reproduction_amount * fertility); i++) {
 		double theta = fRand(0, 2 * 3.14159265);
 
-		double x = spawn_distance * cos(theta);
-		double y = spawn_distance * sin(theta);
+		double x = l.getX() + spawn_distance * cos(theta);
+		double y = l.getY() + spawn_distance * sin(theta);
 
 		O = new Animal(x, y);
 	}
