@@ -36,3 +36,6 @@ double MicroOrganism::operator-(MicroOrganism & O)
 	result = sqrt(pow(delta_x, 2.0) + pow(delta_y, 2.0) + pow(delta_z, 2.0));
 	return result;
 }
+void event() {
+
+}

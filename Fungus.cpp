@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 /*
 Authors: Andrew Yoder, Thomas Stryjski, Zachary O'Brien
 Email: aby7159@rit.edu, tgs9181@rit.edu, zjo5244@rit.edu
@@ -61,6 +62,11 @@ void Fungus::aged(int a) {
 	spawn_distance = 4 - (a / 100);//decreases spawn distance as the cell gets older, scaled by the constant 100. Acculmulates
 }
 
+=======
+
+
+#include "Fungus.h"
+>>>>>>> da62becf1712bb9db3e2381da485c666b5ab44f2
 
 
 

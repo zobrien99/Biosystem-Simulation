@@ -9,6 +9,7 @@ Purpose: Executes functions declared in Animal.h
 */
 
 #include "Animal.h"
+#include "Miscellaneous.h"
 
 //constructors
 Animal::Animal(double x, double y) {
@@ -29,30 +30,29 @@ double Animal::get_co2() {
 	return co2;
 }
 
+double Animal::get_fertility() {
+	return fertility;
+}
+
 //setters
 void Animal::set_o2(double x) {
 	o2 = x;
 }
 void Animal::set_fertility() {
-	fertility = (1 + ((o2 / 5) - 1));
+	fertility = 1 + ((o2 / 5) - 1);
 }
 
 //other
-void Animal::reproduce() {
-	for (int i = 0; i <= int(reproduction_amount * fertility); i++) {
+void Animal::reproduce(Organism *O) {
 		double theta = fRand(0, 2 * 3.14159265);
 
-		double x = spawn_distance * cos(theta);
-		double y = spawn_distance * sin(theta);
+		double x = l.getX() + spawn_distance * cos(theta);
+		double y = l.getY() + spawn_distance * sin(theta);
 
-		Animal(x, y);
-	}
+		O = new Animal(x, y);	
 }
-void Animal::aged(int a) {
-	movement = movement - (a / 20); //decereases movement the older the cell is, although this is scaled by the constant 10. Accumulates
-	spawn_distance = 4 - (a / 100);//decreases spawn distance as the cell gets older, scaled by the constant 100. Acculmulates
-}
-double Animal::fRand(double fMin, double fMax) {
-	double f = (double)rand() / RAND_MAX;
-	return fMin + f * (fMax - fMin);
+void Animal::aged() {
+	age++;
+	movement = movement - (age / 20); //decereases movement the older the cell is, although this is scaled by the constant 10. Accumulates
+	spawn_distance = 4 - (age / 100);//decreases spawn distance as the cell gets older, scaled by the constant 100. Acculmulates
 }

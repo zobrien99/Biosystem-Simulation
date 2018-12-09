@@ -18,6 +18,7 @@ class Organism{
 		 int consumption_time;
 		 int reproduction_amount;
 		 int reproduction_time;
+		 int reproduction_counter;
 		 int age;
 		 double movement;
 		 double spawn_distance;
@@ -25,7 +26,7 @@ class Organism{
 
 	public:
 		//abstract functions, must be defined in inherited classes
-		 virtual void reproduce()=0;
+		 virtual void reproduce(Organism *O)=0;
 
 		 //getters
 		 int get_con_amount();
@@ -33,9 +34,11 @@ class Organism{
 		 int get_rep_amount();
 		 int get_rep_time();
 		 int get_age();
+		 int get_rep_counter();
 		 double get_movement();
 		 double get_spawn_distance();
 		 double get_visibility();
+
 
 		 //setters
 		 void set_con_amount(int x);
@@ -46,5 +49,7 @@ class Organism{
 		 void set_movement(double x);
 		 void set_spawn_distance(double x);
 		 void set_visibility(double x);
+		 void set_rep_counter(double x);
 
+		 void dec_rep_counter();
 };
