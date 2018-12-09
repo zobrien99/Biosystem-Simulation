@@ -23,7 +23,7 @@ using namespace std;
 
 int main(){
     
-    int cond, ani_pop, plant_pop, numenv, t;
+    int cond, ani_pop, plant_pop, bact_pop, fung_pop, numenv, t;
     double x, macEnv_x, macEnv_y, ani_x, ani_y, micEnv_x, micEnv_y; 
     double micEnv_z, bac_x, bac_y, bac_z, min_t, max_t;
 
