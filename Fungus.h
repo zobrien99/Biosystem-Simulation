@@ -13,8 +13,7 @@ Purpose: derived class for small fungi
 class Fungus:public MicroOrganism {
 
 	protected:
-		double fertility;
-		
+		double fertility;	
 
 
-}
+};
