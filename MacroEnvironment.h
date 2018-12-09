@@ -31,10 +31,12 @@ class MacroEnvironment : public Environment {
 		//constructors
 		MacroEnvironment();
 		MacroEnvironment(int t, double temp, double min_t, double max_t, double x, double y,int num_animals, int num_plants);
-
+		
 		//setters
 		void setBounds(double x, double y);
 		
 		int animal_pop();
 		int plant_pop();
+
+		void event();
 };
