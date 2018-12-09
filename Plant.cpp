@@ -9,6 +9,7 @@ Purpose: Executes functions declared in Plant.h
 */
 
 #include "Plant.h"
+#include "Miscellaneous.h"
 
 //constructors
 Plant::Plant(double x, double y) {
@@ -49,10 +50,7 @@ void Plant::reproduce(Organism *O) {
 		O = new Plant(x, y);
 	}
 }
-void Plant::aged(int a) {
-	spawn_distance = 4 + (a / 100);//increases spawn distance as the cell gets older, scaled by the constant 100. Acculmulates
-}
-double Plant::fRand(double fMin, double fMax) {
-	double f = (double)rand() / RAND_MAX;
-	return fMin + f * (fMax - fMin);
+void Plant::aged() {
+	age++;
+	spawn_distance = 4 + (age / 100);//increases spawn distance as the cell gets older, scaled by the constant 100. Acculmulates
 }
