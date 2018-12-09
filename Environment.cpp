@@ -12,25 +12,24 @@ Purpose: Describes the functions declared in "Environment.h"
 #include "Environment.h"
 
 //constructor
-Environment::Environment() {
+Environment::Environment():temp(50, 10.0, 0.0, 50){
 	run_to_time = 10;
 	min_temp = 0;
 	max_temp = 100;
 	time = 0;
 
-	double amplitude = (max_temp - min_temp) / 2;
-	double center = (max_temp + min_temp) / 2;
-	temp(amplitude, 10.0, 0.0, center);
+//	temp(amplitude, 10.0, 0.0, center);
 }
-Environment::Environment(int t, double min_t, double max_t) {
+Environment::Environment(int t, double min_t, double max_t)
+	:temp(((max_t - min_t) / 2),10.0,0.0,((max_t + min_t) / 2)) {
 	run_to_time = t;
 	max_temp = max_t;
 	min_temp = min_t;
 	time = 0;
 
-	double amplitude = (max_temp - min_temp) / 2;
-	double center = (max_temp + min_temp) / 2;
-	temp(amplitude, 10.0, 0.0, center);
+//	double amplitude = (max_temp - min_temp) / 2;
+//	double center = (max_temp + min_temp) / 2;
+//	temp(amplitude, 10.0, 0.0, center);
 }
 
 

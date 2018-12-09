@@ -24,13 +24,16 @@ MacroEnvironment::MacroEnvironment() {
 
 	double amplitude = (max_temp - min_temp) / 2;
 	double center = (max_temp + min_temp) / 2;
-	temp(amplitude, 10.0, 0.0, center);
+	Sinusoid a(amplitude, 10.0, 0.0, center);
+	temp = a;
 	//
 
 
 	setBounds(50, 50);
-	animals = new vector <Animal> (10);
-	plants = new vector <Plant> (10);
+	vector<Animal> a_temp(10);
+	vector<Plant> p_temp(10);
+	animals = a_temp;
+	plants = p_temp;
 	spawn_animals();
 	spawn_plants();
 }
@@ -45,12 +48,15 @@ MacroEnvironment::MacroEnvironment(int t, double min_t, double max_t, double x, 
 
 	double amplitude = (max_temp - min_temp) / 2;
 	double center = (max_temp + min_temp) / 2;
-	temp(amplitude, 10.0, 0.0, center);
+	Sinusoid a(amplitude, 10.0, 0.0, center);
+	temp = a;
 	//
 
 	setBounds(x, y);
-	animals = new vector <Animal>(num_animals);
-	plants = new vector <Plant>(num_plants);
+	vector <Animal> a_temp (num_animals);
+	vector <Plant> p_temp (num_plants);
+	animals = a_temp;
+	plants = p_temp;
 	spawn_animals();
 	spawn_plants();
 }
@@ -89,7 +95,7 @@ void MacroEnvironment::spawn_animals() {
 	for (int i = 0; i < animals.size(); i++) {
 		x = fRand(-(x_max), x_max);
 		y = fRand(-(y_max), y_max);
-		animals[i] = new Animal(x, y);
+		animals[i] = Animal(x, y);
 	}
 }
 
@@ -98,7 +104,7 @@ void MacroEnvironment::spawn_plants() {
 	for (int i = 0; i < plants.size(); i++) {
 		x = fRand(-(x_max), x_max);
 		y = fRand(-(y_max), y_max);
-		plants[i] = new Plant(x, y);
+		plants[i] = Plant(x, y);
 	}
 }
 
@@ -130,9 +136,9 @@ void MacroEnvironment::event() {
 	double dist_temp, dist_closest;
 	for (int i = 0; i < animal_size; i++) {
 		dist_closest = animals[i] - plants[0];
-		closest = plants[0];
+		closest = &plants[0];
 		for (int j = 0; j < plant_size; j++) {
-			temp = plants[j];
+			temp = &plants[j];
 			dist_temp = animals[i] - *temp;
 			if (dist_temp < dist_closest) {
 				dist_closest = dist_temp;
@@ -142,7 +148,7 @@ void MacroEnvironment::event() {
 		if (dist_closest < animals[i].get_movement()) { //closest plant is within movement range
 			animals[i] + temp;
 		}
-		else if (dist_closest < animals[i].get_visability()) { // closest plant is within visability range
+		else if (dist_closest < animals[i].get_visibility()) { // closest plant is within visability range
 			double new_x = animals[i].getLocation().getX() + animals[i].get_movement() * animals[i].unit_x(*temp);
 			double new_y = animals[i].getLocation().getY() + animals[i].get_movement() * animals[i].unit_y(*temp);
 			animals[i].setLocation(new_x, new_y);
@@ -166,7 +172,7 @@ void MacroEnvironment::event() {
 			for (int j = 0; j < int(plants[i].get_rep_amount() * plants[i].get_fertility()); j++) {
 				Plant *p;
 				plants[i].reproduce(p);
-				plants.push_back(*a);
+				plants.push_back(*p);
 			}
 		}
 		plants[i].dec_rep_counter();
