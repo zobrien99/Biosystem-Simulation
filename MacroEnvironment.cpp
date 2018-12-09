@@ -117,7 +117,7 @@ void MacroEnvironment::event() {
 		//reproduce
 	for (int i = 0; i < animal_size; i++) {
 		if (animals[i].get_rep_counter() == 0) {
-			for (int j = 0; j < int(animals[i].get_rep_ammount() * animals[i].get_fertility()); j++) {
+			for (int j = 0; j < int(animals[i].get_rep_amount() * animals[i].get_fertility()); j++) {
 				Animal *a;
 				animals[i].reproduce(a);
 				animals.push_back(*a);
@@ -150,7 +150,7 @@ void MacroEnvironment::event() {
 	
 	for (int i = 0; i < plant_size; i++) {
 		if (plants[i].get_rep_counter() == 0) {
-			for (int j = 0; j < int(plants[i].get_rep_ammount() * plants[i].get_fertility()); j++) {
+			for (int j = 0; j < int(plants[i].get_rep_amount() * plants[i].get_fertility()); j++) {
 				Plant *p;
 				plants[i].reproduce(p);
 				plants.push_back(*a);
