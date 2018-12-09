@@ -18,8 +18,8 @@ class MacroEnvironment : public Environment {
 
 	private:
 		double x_max, y_max;
-		vector<Animal> animals;
-		vector<Plant>  plants;
+		vector<Animal> * animals;
+		vector<Plant>  * plants;
 
 		//others
 		bool within_bounds(MacroOrganism &O);
@@ -30,7 +30,7 @@ class MacroEnvironment : public Environment {
 	public:
 		//constructors
 		MacroEnvironment();
-		MacroEnvironment(int t, double temp, double min_t, double max_t, double x, double y,int num_animals, int num_plants);
+		MacroEnvironment(int t, double min_t, double max_t, double x, double y,int num_animals, int num_plants);
 		
 		//setters
 		void setBounds(double x, double y);

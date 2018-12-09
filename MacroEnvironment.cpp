@@ -34,7 +34,7 @@ MacroEnvironment::MacroEnvironment() {
 	spawn_animals();
 	spawn_plants();
 }
-MacroEnvironment::MacroEnvironment(int t, double min_t, double max_t, double x, double y,int num_animals, int num_plants){
+MacroEnvironment::MacroEnvironment(int t, double min_t, double max_t, double x, double y, int num_animals, int num_plants){
 	//Environment(temp, t, max_t, min_t);
 	
 	//
@@ -98,7 +98,7 @@ void MacroEnvironment::spawn_plants() {
 	for (int i = 0; i < plants.size(); i++) {
 		x = fRand(-(x_max), x_max);
 		y = fRand(-(y_max), y_max);
-		animals[i] = new Plant(x, y);
+		plants[i] = new Plant(x, y);
 	}
 }
 
@@ -111,9 +111,10 @@ int MacroEnvironment::plant_pop() {
 }
 
 void MacroEnvironment::event() {
-	//Animal Actions
 	int animal_size = animals.size();
-	
+	int plant_size = plants.size();
+	//Animal Actions
+		//reproduce
 	for (int i = 0; i < animal_size; i++) {
 		if (animals[i].get_rep_counter() == 0) {
 			for (int j = 0; j < int(animals[i].get_rep_ammount() * animals[i].get_fertility()); j++) {
@@ -124,9 +125,29 @@ void MacroEnvironment::event() {
 		}
 		animals[i].dec_rep_counter();
 	}
-	
+		//eat
+	Plant *closest, *temp;
+	double dist_temp, dist_closest;
+	for (int i = 0; i < animal_size; i++) {
+		dist_closest = animals[i] - plants[0];
+		closest = plants[0];
+		for (int j = 0; j < plant_size; j++) {
+			temp = plants[j];
+			dist_temp = animals[i] - *temp;
+			if (dist_temp < dist_closest) {
+				dist_closest = dist_temp;
+				closest = temp;
+			}
+		}
+//		if (dist_closest < animals[i].get_movement()) {
+					
+//		}
+	}
+
+
+
 	//Plant Actions
-	int plant_size = plants.size();
+	
 	for (int i = 0; i < plant_size; i++) {
 		if (plants[i].get_rep_counter() == 0) {
 			for (int j = 0; j < int(plants[i].get_rep_ammount() * plants[i].get_fertility()); j++) {
