@@ -34,5 +34,6 @@ class Animal: public MacroOrganism{
 		//other
 		void reproduce(Organism *O);
 		void aged();
+		Animal operator+(Plant *p);
 };
 
