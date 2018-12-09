@@ -9,6 +9,7 @@ Purpose: derived class for small fungi
 */
 
 #include "MicroOrganism.h"
+#pragma once
 
 class Fungus:public MicroOrganism {
 
