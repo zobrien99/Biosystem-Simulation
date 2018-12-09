@@ -31,7 +31,7 @@ class Bacteria :public MicroOrganism {
 		void set_fertility(); //determines reproduction values as a function of temperature and sunlight
 
 		//other
-		void reproduce();
+		void reproduce(Organism *);
 		void aged(int AGE);
 		double fRand(double fMin, double fMax);
 	
