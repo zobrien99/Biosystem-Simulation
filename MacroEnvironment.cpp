@@ -145,10 +145,10 @@ void MacroEnvironment::event() {
 				closest = temp;
 			}
 		}
-		if (dist_closest < animals[i].get_movement()) { //closest plant is within movement range
+		if (dist_closest <= animals[i].get_movement()) { //closest plant is within movement range
 			animals[i] + temp;
 		}
-		else if (dist_closest < animals[i].get_visibility()) { // closest plant is within visability range
+		else if (dist_closest <= animals[i].get_visibility()) { // closest plant is within visability range
 			double new_x = animals[i].getLocation().getX() + animals[i].get_movement() * animals[i].unit_x(*temp);
 			double new_y = animals[i].getLocation().getY() + animals[i].get_movement() * animals[i].unit_y(*temp);
 			animals[i].setLocation(new_x, new_y);

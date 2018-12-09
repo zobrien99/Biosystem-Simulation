@@ -20,6 +20,7 @@ class Organism{
 		 int reproduction_time;
 		 int reproduction_counter;
 		 int age;
+		 int strength;
 		 double movement;
 		 double spawn_distance;
 		 double visibility;
@@ -35,6 +36,7 @@ class Organism{
 		 int get_rep_time();
 		 int get_age();
 		 int get_rep_counter();
+		 int get_strength();
 		 double get_movement();
 		 double get_spawn_distance();
 		 double get_visibility();
@@ -46,10 +48,12 @@ class Organism{
 		 void set_rep_amount(int x);
 		 void set_rep_time(int x);
 		 void set_age(int x);
+		 void set_rep_counter(int x);
+		 void set_strenth(int x);
+
 		 void set_movement(double x);
 		 void set_spawn_distance(double x);
 		 void set_visibility(double x);
-		 void set_rep_counter(double x);
-
+		 
 		 void dec_rep_counter();
 };
