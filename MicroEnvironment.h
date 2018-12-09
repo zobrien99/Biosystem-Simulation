@@ -13,7 +13,7 @@ Purpose: Class for ennvorments on microscopic scale;
 #include "Environment.h"
 #include "MicroOrganism.h"
 #include "Bacteria.h"
-//#include "Fungus.h"
+#include "Fungus.h"
 #include <vector>
 using namespace std;
 
@@ -21,13 +21,19 @@ class MicroEnvironment : public Environment {
 
 private:
 	double x_max, y_max, z_max;
-	//vector<Bacteria> *bacteria;
-	//vector<Fungus> * fungi;
+	vector<Bacteria> *bacteria;
+	vector<Fungus> *fungi;
 
 	bool within_bounds(MicroOrganism &O);
+    void spawn_bacteria();
+    void spawn_fungi();
 
 public:
-	MicroEnvironment(double temp, int t, double max_t, double min_t, double x, double y, double z);
+	MicroEnvironment();
+    int bacteria_pop();
+    int fungus_pop();
+    void event();    
+    MicroEnvironment(int t, double min_t, double max_t, double x, double y, double z, int num_bacteria, int num_fungus);
 	void setBounds(double x, double y, double z);
 
 };
