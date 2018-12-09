@@ -25,6 +25,7 @@ class Animal: public MacroOrganism{
 
 		//getters
 		double get_co2();
+		double get_fertility();
 
 		//setters
 		void set_o2(double x);
@@ -32,7 +33,7 @@ class Animal: public MacroOrganism{
 
 		//other
 //		void reproduce();
-		void aged(int AGE);
-		double fRand(double fMin, double fMax);
+		void aged();
+//		double fRand(double fMin, double fMax);
 };
 
