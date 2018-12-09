@@ -24,4 +24,10 @@ class MacroOrganism :public Organism {
 		void setLocation(Point p);
 		
 		double operator-(MacroOrganism &O);
+
+		double delta_x(MacroOrganism &O);
+		double delta_y(MacroOrganism &O);
+
+		double unit_x(MacroOrganism &O);
+		double unit_y(MacroOrganism &O);
 };

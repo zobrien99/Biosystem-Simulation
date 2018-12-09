@@ -19,7 +19,7 @@ Sinusoid::Sinusoid() {
 	phase = 0;
 	offset = 0;
 }
-Sinusoid::Sinusoid(int a, int b, int c, int d) {
+Sinusoid::Sinusoid(double a, double b, double c, double d) {
 	amplitude = a;
 	period = b;
 	phase = c;
@@ -42,7 +42,7 @@ double Sinusoid::get_off() {
 
 //setters
 void Sinusoid::set_amp(double a, double b) {
-	amplitude = 0.5*(a / b);
+	amplitude = 0.5*(a - b);
 }
 void Sinusoid::set_per(double c) {
 	period = c;
