@@ -26,11 +26,14 @@ int Organism::get_rep_time() {
 int Organism::get_age() {
 	return age;
 }
+int Organism::get_con_food_counter() {
+	return consumption_food_counter;
+}
+int Organism::get_con_time_counter() {
+	return consumption_time_counter;
+}
 int Organism::get_rep_counter() {
 	return reproduction_counter;
-}
-int Organism::get_strength() {
-	return strength;
 }
 double Organism::get_movement() {
 	return movement;
@@ -58,11 +61,14 @@ void Organism::set_rep_time(int x) {
 void Organism::set_age(int x) {
 	age = x;
 }
+void Organism::set_con_food_counter(int x) {
+	consumption_food_counter = x;
+}
+void Organism::set_con_time_counter(int x) {
+	consumption_time_counter = x;
+}
 void Organism::set_rep_counter(int x) {
 	reproduction_counter = x;
-}
-void Organism::set_strenth(int x) {
-	strength = x;
 }
 void Organism::set_movement(double x) {
 	movement = x;
@@ -74,13 +80,21 @@ void Organism::set_visibility(double x) {
 	visibility = x;
 }
 
-
+void Organism::dec_con_food_counter() {
+	if (consumption_food_counter == 0)
+		consumption_food_counter = consumption_amount;
+	else
+		consumption_food_counter--;
+}
+void Organism::dec_con_time_counter() {
+	if (consumption_time_counter == 0)
+		consumption_time_counter = consumption_time;
+	else
+		consumption_time_counter--;
+}
 void Organism::dec_rep_counter() {
 	if (reproduction_counter == 0)
 		reproduction_counter = reproduction_time;
 	else
 		reproduction_counter--;
-}
-void Organism::deplete_strength() {
-	strength--;
 }
