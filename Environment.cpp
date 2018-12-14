@@ -21,7 +21,7 @@ Environment::Environment():temp(50, 10.0, 0.0, 50){
 //	temp(amplitude, 10.0, 0.0, center);
 }
 Environment::Environment(int t, double min_t, double max_t)
-	:temp(((max_t - min_t) / 2),10.0,0.0,((max_t + min_t) / 2)) {
+	:temp(((max_t - min_t) / 2),10.0,0.0,((max_t + min_t) / 2)) {//: calls constructor for member object, shorthand
 	run_to_time = t;
 	max_temp = max_t;
 	min_temp = min_t;
@@ -47,7 +47,7 @@ double Environment::getMax_temp(){
     return max_temp;
 }
 double Environment::get_temp() {
-	temp.func(time);
+	return temp.func(time);
 }
 
 // setters

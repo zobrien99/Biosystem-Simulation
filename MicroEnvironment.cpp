@@ -11,10 +11,19 @@ Purpose: Class for ennvorments on microscopic scale;
 #include "Miscellaneous.h"
 
 MicroEnvironment::MicroEnvironment() {
-	Environment();
-	x_max = 50;
-	y_max = 50;
-    z_max = 50;
+	//Environment(); WE can't use constructors created in abstract classes
+	//setting inherited variables manually, since we can't inherit default values
+	run_to_time = 10;
+	min_temp = 0;
+	max_temp = 100;
+	time = 0;
+	
+	double amplitude = (max_temp - min_temp) / 2;
+	double center = (max_temp + min_temp) / 2;
+	Sinusoid temporary (amplitude, 10, 0, center);
+	temp = temporary;
+
+	setBounds(50, 50, 50);
 	bacteria = new vector <Bacteria> (10);
 	fungus = new vector <Fungus> (10);
 	spawn_bacteria();
@@ -22,7 +31,18 @@ MicroEnvironment::MicroEnvironment() {
 }
 
 MicroEnvironment::MicroEnvironment(int t, double min_t, double max_t, double x, double y, double z, int num_bacteria, int num_fungus) {
-	Environment(temp, t, max_t, min_t);
+	//Environment(temp, t, max_t, min_t);
+	//setting inherited variables manually, since we can't inherit default values
+	run_to_time = t;
+	min_temp = min_t;
+	max_temp = max_t;
+	time = 0;
+
+	double amplitude = (max_temp - min_temp) / 2;
+	double center = (max_temp + min_temp) / 2;
+	Sinusoid temporary(amplitude, 10, 0, center);
+	temp = temporary;
+
 	setBounds(x, y, z);
     bacteria = new vector <Bacteria>(num_bacteria);
 	fungus = new vector <Fungus>(num_fungus);

@@ -29,14 +29,8 @@ Fungus::Fungus(double x, double y, double z) {
 //none needed
 
 //setters
-void Fungus::set_sunlight(double x) {
-	sunlight = x;
-}
-void Fungus::set_chemical(double x) {
-	chemical = x;
-}
 void Fungus::set_fertility() {
-	fertility = 1 + ((2 * sunlight - 2 * chemical) / 3);
+	fertility = 2;
 }
 
 //other

@@ -20,6 +20,7 @@ using namespace std;
 class MicroEnvironment : public Environment {
 
 private:
+	Sinusoid temp;
 	double x_max, y_max, z_max;
 	vector<Bacteria> *bacteria;
 	vector<Fungus> *fungi;
