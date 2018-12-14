@@ -20,13 +20,14 @@ using namespace std;
 class MicroEnvironment : public Environment {
 
 private:
+	Sinusoid temp;
 	double x_max, y_max, z_max;
-	vector<Bacteria> *bacteria;
-	vector<Fungus> *fungi;
+	vector<Bacteria*> bacteria;
+	vector<Fungus*> fungi;
 
 	bool within_bounds(MicroOrganism &O);
-    void spawn_bacteria();
-    void spawn_fungi();
+    void spawn_bacteria(int num);
+    void spawn_fungi(int num);
 
 public:
 	MicroEnvironment();
@@ -37,4 +38,5 @@ public:
 	void setBounds(double x, double y, double z);
 
 	void event();
+	void print();
 };
