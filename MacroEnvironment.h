@@ -18,14 +18,14 @@ class MacroEnvironment : public Environment {
 
 	private:
 		double x_max, y_max;
-		vector<Animal> animals;
-		vector<Plant> plants;
+		vector<Animal*> animals;
+		vector<Plant*> plants;
 
 		//others
 		bool within_bounds(MacroOrganism &O);
 	
-		void spawn_animals();
-		void spawn_plants();
+		void spawn_animals(int num);
+		void spawn_plants(int num);
 
 	public:
 		//constructors
