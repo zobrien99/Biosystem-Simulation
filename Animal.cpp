@@ -19,7 +19,6 @@ Animal::Animal(double x, double y) {
 	reproduction_time = 3;
 	reproduction_counter = reproduction_time;
 	age = 0;
-	strength = 3;
 	movement = 1;
 	spawn_distance = 4;
 	visibility = 2;
@@ -62,7 +61,7 @@ void Animal::aged() {
 Animal Animal::operator+(Plant *p) {
 	Point newLocation = p->getLocation();
 	this->setLocation(newLocation);
-	strength++;
+	dec_con_food_counter();
 //	delete p;
 	return *this;
 }
