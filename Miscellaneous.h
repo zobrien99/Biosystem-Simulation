@@ -7,6 +7,8 @@ Assignment: Project 3
 
 Purpose: Misclaneous Functions
 */
+
+#include <cmath>
 #pragma once
 
 double fRand(double fMin, double fMax);
