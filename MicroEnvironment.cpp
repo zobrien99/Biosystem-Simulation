@@ -10,6 +10,8 @@ Purpose: Class for ennvorments on microscopic scale;
 #include "MicroEnvironment.h"
 #include "Miscellaneous.h"
 
+using namespace std;
+
 MicroEnvironment::MicroEnvironment() {
 	//Environment(); WE can't use constructors created in abstract classes
 	//setting inherited variables manually, since we can't inherit default values
@@ -121,3 +123,7 @@ void MicroEnvironment::event() {
 	}
 }
 
+void MicroEnvironment::print() {
+	cout << time << "\t" << bacteria_pop() << "\t" << fungus_pop() << endl;
+
+}
