@@ -27,7 +27,7 @@ int main(){
     double x, macEnv_x, macEnv_y, ani_x, ani_y, micEnv_x, micEnv_y; 
     double micEnv_z, bac_x, bac_y, bac_z, min_t, max_t;
 
-	Environment* sim;
+	Environment* sim = NULL;
     
     cout << "Welcome to the Biosystem Simulation program \n\n";    
   
@@ -35,7 +35,7 @@ int main(){
     cout << "Enter 1 to simulate macroorganisms or 2 to simulate microorganisms: ";
     cin >> cond;
    
-    if (cond = 1){
+    if (cond == 1){
         
         cout << "Enter x size of Environment: ";
         cin >> macEnv_x;
@@ -66,7 +66,7 @@ int main(){
     }
     
     
-    if (cond = 2){         
+    if (cond == 2){         
          
         cout << "Enter x size of Environment: ";
         cin >> micEnv_x;
@@ -99,7 +99,6 @@ int main(){
     
 	for (int i = 0; i < sim->get_run_to_time(); i++) {
 		sim->event();
-		if (i % 5 == 4)
 			sim->print();
 	}
 

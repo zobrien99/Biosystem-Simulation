@@ -89,6 +89,8 @@ void MacroEnvironment::event() {
 	animal_die();
 	animal_reproduce();
 	plant_reproduce();
+	animal_age();
+	plant_age();
 	time++;
 }
 
@@ -182,6 +184,7 @@ void MacroEnvironment::animal_reproduce() {
 	int an = animals.size();
 	for (int i = 0; i < an; i++) {
 		if (animals[i]->get_rep_counter() == 0) {
+			animals[i]->set_fertility();
 			for (int j = 0; j < int(animals[i]->get_rep_amount() * animals[i]->get_fertility()); j++) {
 				Animal *a = new Animal(0, 0);
 				animals[i]->reproduce(a);
@@ -191,6 +194,14 @@ void MacroEnvironment::animal_reproduce() {
 		animals[i]->dec_rep_counter();
 	}
 }
+void MacroEnvironment::animal_age(){
+
+	for (int i = 0; i < animals.size(); i++) {
+		animals[i]->aged();
+	}
+
+}
+
 //Plant Actions
 void MacroEnvironment::plant_reproduce() {
 	int pl = plants.size();
@@ -206,4 +217,9 @@ void MacroEnvironment::plant_reproduce() {
 	}
 }
 
+void MacroEnvironment::plant_age() {
+	for (int i = 0; i < plants.size(); i++) {
+		plants[i]->aged();
+	}
+}
 

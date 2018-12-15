@@ -26,8 +26,8 @@ Animal::Animal(double x, double y) {
 	visibility = 2;
 
 	//temp setter
-	o2 = 7;
-	co2 = 7;
+	o2 = 5;
+	co2 = 5;
 	fertility = 1;
 
 	setLocation(x, y);
