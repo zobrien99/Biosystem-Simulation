@@ -33,7 +33,9 @@ public:
 	MicroEnvironment();
     int bacteria_pop();
     int fungus_pop();
-        
+
+    
+
     MicroEnvironment(int t, double min_t, double max_t, double x, double y, double z, int num_bacteria, int num_fungus);
 	void setBounds(double x, double y, double z);
 

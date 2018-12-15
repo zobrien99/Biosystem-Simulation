@@ -33,6 +33,8 @@ class Animal: public MacroOrganism{
 		void set_fertility(); //determines reproduction values as a function of temperature and sunlight
 
 		//other
+		//void reproduce(Organism *O);
+		void reproduce(Animal *a);
 		void reproduce(Organism *O);
 		void aged();
 		Animal operator+(Plant *p);

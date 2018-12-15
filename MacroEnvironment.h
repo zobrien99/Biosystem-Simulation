@@ -34,9 +34,10 @@ class MacroEnvironment : public Environment {
 		void animal_eat_move();
 		void animal_die();
 		void animal_reproduce();
+		void animal_age();
 			//Plant Actions
 		void plant_reproduce();
-
+		void plant_age();
 	public:
 		//constructors
 		MacroEnvironment();

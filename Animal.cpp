@@ -25,6 +25,10 @@ Animal::Animal(double x, double y) {
 	spawn_distance = 4;
 	visibility = 2;
 
+	//temp setter
+	o2 = 5;
+	co2 = 5;
+	fertility = 1;
 
 	setLocation(x, y);
 }
@@ -53,8 +57,18 @@ void Animal::reproduce(Organism *O) {
 		double x = l.getX() + spawn_distance * cos(theta);
 		double y = l.getY() + spawn_distance * sin(theta);
 
-		O = new Animal(x, y);	
+		O = new Animal(x,y);	
 }
+
+void Animal::reproduce(Animal *A) {
+	double theta = fRand(0, 2 * 3.14159265);
+
+	double x = l.getX() + spawn_distance * cos(theta);
+	double y = l.getY() + spawn_distance * sin(theta);
+
+	A->setLocation(x, y);
+}
+
 void Animal::aged() {
 	age++;
 	movement = movement - (age / 20); //decereases movement the older the cell is, although this is scaled by the constant 10. Accumulates

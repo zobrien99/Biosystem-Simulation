@@ -1,3 +1,4 @@
+
 /*
 Authors: Andrew Yoder, Thomas Stryjski, Zachary O'Brien
 Email: aby7159@rit.edu, tgs9181@rit.edu, zjo5244@rit.edu
@@ -108,7 +109,6 @@ while (cond == 1 || cond == 2){
     
 	for (int i = 0; i < sim->get_run_to_time(); i++) {
 		sim->event();
-		if (i % 5 == 4)
 			sim->print();
 	}
 

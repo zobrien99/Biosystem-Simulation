@@ -35,5 +35,6 @@ public:
 
 	//other
 	void reproduce(Organism *O);
+	void reproduce(Plant *P);
 	void aged();
 };
