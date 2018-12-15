@@ -7,20 +7,96 @@ Assignment: Project 3
 
 Purpose: Class for ennvorments on macroscopic scale;
 */
-
 #include "MacroEnvironment.h"
-#include "MacroOrganism.h"
 #include "Miscellaneous.h"
 
 using namespace std;
 
+
+//constructors
+MacroEnvironment::MacroEnvironment() {
+	//Environment();
+	run_to_time = 10;
+	min_temp = 0;
+	max_temp = 100;
+	time = 0;
+
+	double amplitude = (max_temp - min_temp) / 2;
+	double center = (max_temp + min_temp) / 2;
+	Sinusoid a(amplitude, 10.0, 0.0, center);
+	temp = a;
+
+	setBounds(50, 50);
+	//	vector<Animal> a_temp(10);
+	//	vector<Plant> p_temp(10);
+	//	animals = a_temp;
+	//	plants = p_temp;
+	spawn_animals(10);
+	spawn_plants(10);
+}
+MacroEnvironment::MacroEnvironment(int t, double min_t, double max_t, double x, double y, int num_animals, int num_plants) {
+	//Environment(temp, t, max_t, min_t);
+	run_to_time = t;
+	max_temp = max_t;
+	min_temp = min_t;
+	time = 0;
+
+	double amplitude = (max_temp - min_temp) / 2;
+	double center = (max_temp + min_temp) / 2;
+	Sinusoid a(amplitude, 10.0, 0.0, center);
+	temp = a;
+
+	setBounds(x, y);
+	//	vector <Animal> a_temp (num_animals);
+	//	vector <Plant> p_temp (num_plants);
+	//	animals = a_temp;
+	//	plants = p_temp;
+	spawn_animals(num_animals);
+	spawn_plants(num_plants);
+}
+
+//getters
+int MacroEnvironment::animal_pop() {
+	return animals.size();
+}
+int MacroEnvironment::plant_pop() {
+	return plants.size();
+}
+
+//setters
+void MacroEnvironment::setBounds(double x, double y) {
+	if (x > 0)
+		x_max = x;
+	else if (x < 0)
+		x_max = -x;
+	else
+		x_max = 50;
+	////////////////////////////////////
+	if (y > 0)
+		y_max = y;
+	else if (y < 0)
+		y_max = -y;
+	else
+		y_max = 50;
+}
+
+//others
+void MacroEnvironment::print() {
+	cout << time << "\t" << animal_pop() << "\t" << plant_pop() << endl;
+}
+void MacroEnvironment::event() {
+	animal_eat_move();
+	animal_die();
+	animal_reproduce();
+	plant_reproduce();
+}
 
 //Utility functions
 //Independent
 bool MacroEnvironment::within_bounds(MacroOrganism &O) {
 	double x_cord = O.getLocation().getX();
 	double y_cord = O.getLocation().getY();
-	
+
 	if ((x_cord > x_max) || (x_cord < -(x_max)))
 		return false;
 	if ((y_cord > y_max) || (y_cord < -(y_max)))
@@ -123,86 +199,5 @@ void MacroEnvironment::plant_reproduce() {
 		plants[i]->dec_rep_counter();
 	}
 }
-
-
-
-//constructors
-MacroEnvironment::MacroEnvironment() {
-	//Environment();
-	run_to_time = 10;
-	min_temp = 0;
-	max_temp = 100;
-	time = 0;
-
-	double amplitude = (max_temp - min_temp) / 2;
-	double center = (max_temp + min_temp) / 2;
-	Sinusoid a(amplitude, 10.0, 0.0, center);
-	temp = a;
-
-	setBounds(50, 50);
-	//	vector<Animal> a_temp(10);
-	//	vector<Plant> p_temp(10);
-	//	animals = a_temp;
-	//	plants = p_temp;
-	spawn_animals(10);
-	spawn_plants(10);
-}
-MacroEnvironment::MacroEnvironment(int t, double min_t, double max_t, double x, double y, int num_animals, int num_plants) {
-	//Environment(temp, t, max_t, min_t);
-	run_to_time = t;
-	max_temp = max_t;
-	min_temp = min_t;
-	time = 0;
-
-	double amplitude = (max_temp - min_temp) / 2;
-	double center = (max_temp + min_temp) / 2;
-	Sinusoid a(amplitude, 10.0, 0.0, center);
-	temp = a;
-
-	setBounds(x, y);
-	//	vector <Animal> a_temp (num_animals);
-	//	vector <Plant> p_temp (num_plants);
-	//	animals = a_temp;
-	//	plants = p_temp;
-	spawn_animals(num_animals);
-	spawn_plants(num_plants);
-}
-
-//getters
-int MacroEnvironment::animal_pop() {
-	return animals.size();
-}
-int MacroEnvironment::plant_pop() {
-	return plants.size();
-}
-
-//setters
-void MacroEnvironment::setBounds(double x, double y) {
-	if (x > 0)
-		x_max = x;
-	else if (x < 0)
-		x_max = -x;
-	else
-		x_max = 50;
-	////////////////////////////////////
-	if (y > 0)
-		y_max = y;
-	else if (y < 0)
-		y_max = -y;
-	else
-		y_max = 50;
-}
-
-//others
-void MacroEnvironment::print() {
-	cout << time << "\t" << animal_pop() << "\t" << plant_pop() << endl;
-}
-void MacroEnvironment::event() {
-	animal_eat_move();
-	animal_die();
-	animal_reproduce();
-	plant_reproduce();
-}
-
 
 
