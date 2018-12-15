@@ -14,6 +14,8 @@ Purpose: Class for ennvorments on macroscopic scale;
 #include "Plant.h"
 
 using namespace std;
+
+
 class MacroEnvironment : public Environment {
 
 	private:
