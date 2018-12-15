@@ -10,29 +10,49 @@ Purpose: Class for ennvorments on microscopic scale;
 #include "MicroEnvironment.h"
 #include "Miscellaneous.h"
 
+using namespace std;
+
 MicroEnvironment::MicroEnvironment() {
-	Environment();
-	x_max = 50;
-	y_max = 50;
-    z_max = 50;
-	bacteria = new vector <Bacteria> (10);
-	fungus = new vector <Fungus> (10);
-	spawn_bacteria();
-	spawn_fungi();
+	//Environment(); WE can't use constructors created in abstract classes
+	//setting inherited variables manually, since we can't inherit default values
+	run_to_time = 10;
+	min_temp = 0;
+	max_temp = 100;
+	time = 0;
+	
+	double amplitude = (max_temp - min_temp) / 2;
+	double center = (max_temp + min_temp) / 2;
+	Sinusoid temporary (amplitude, 10, 0, center);
+	temp = temporary;
+
+	setBounds(50, 50, 50);
+
+	spawn_bacteria(10);
+	spawn_fungi(10);
 }
 
 MicroEnvironment::MicroEnvironment(int t, double min_t, double max_t, double x, double y, double z, int num_bacteria, int num_fungus) {
-	Environment(temp, t, max_t, min_t);
+	//Environment(temp, t, max_t, min_t);
+	//setting inherited variables manually, since we can't inherit default values
+	run_to_time = t;
+	min_temp = min_t;
+	max_temp = max_t;
+	time = 0;
+
+	double amplitude = (max_temp - min_temp) / 2;
+	double center = (max_temp + min_temp) / 2;
+	Sinusoid temporary(amplitude, 10, 0, center);
+	temp = temporary;
+
 	setBounds(x, y, z);
-    bacteria = new vector <Bacteria>(num_bacteria);
-	fungus = new vector <Fungus>(num_fungus);
-	spawn_bacteria();
-	spawn_fungi();
+
+	spawn_bacteria(num_bacteria);
+	spawn_fungi(num_fungus);
 }
 
-void MicroEnvironment::spawn_bacteria() {
-	double x, y;
-	for (int i = 0; i < bacteria.size(); i++) {
+void MicroEnvironment::spawn_bacteria(int num) {
+	double x, y, z;
+	for (int i = 0; i < num; i++) {
 		x = fRand(-(x_max), x_max);
 		y = fRand(-(y_max), y_max);
         z = fRand(-(z_max), z_max);
@@ -40,13 +60,13 @@ void MicroEnvironment::spawn_bacteria() {
 	}
 }
 
-void MicroEnvironment::spawn_fungi() {
-	double x, y;
-	for (int i = 0; i < fungus.size(); i++) {
+void MicroEnvironment::spawn_fungi(int num) {
+	double x, y, z;
+	for (int i = 0; i < num; i++) {
 		x = fRand(-(x_max), x_max);
 		y = fRand(-(y_max), y_max);
         z = fRand(-(z_max), z_max);
-		fungus[i] = new Fungus(x, y, z);
+		fungi[i] = new Fungus(x, y, z);
 	}
 }
 
@@ -92,14 +112,27 @@ int MicroEnvironment::bacteria_pop() {
 }
 
 int MicroEnvironment::fungus_pop() {
-	return fungus.size();
+	return fungi.size();
 }
 
 void MicroEnvironment::event() {
-	for (int i = 0; i < bacteria.size(); i++) {
-		Bacteria *a;
-		bacteria[i].reproduce(a);
-		bacteria.push_back(a);
-	}
+	
 }
 
+void MicroEnvironment::print() {
+	cout << time << "\t" << bacteria_pop() << "\t" << fungus_pop() << endl;
+}
+
+void MicroEnvironment::bacteria_reproduce() {
+	int bac_size = bacteria.size();
+	for (int i = 0; i < bac_size; i++) {
+		if (bacteria[i]->get_rep_counter() == 0) {
+			for (int j = 0; j < int(bacteria[i]->get_rep_amount() * bacteria[i]->get_fertility()); j++) {
+				Bacteria *b = NULL;
+				bacteria[i]->reproduce(b);
+				bacteria.push_back(b);
+			}
+		}
+		bacteria[i]->dec_rep_counter();
+	}
+}

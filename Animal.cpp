@@ -17,10 +17,14 @@ Animal::Animal(double x, double y) {
 	consumption_time = 5;
 	reproduction_amount = 2;
 	reproduction_time = 3;
+	reproduction_counter = reproduction_time;
+	consumption_food_counter = consumption_amount;
+	consumption_time_counter = consumption_time;
 	age = 0;
-	movement = 2;
+	movement = 1;
 	spawn_distance = 4;
-	visibility = 1;
+	visibility = 2;
+
 
 	setLocation(x, y);
 }
@@ -55,4 +59,11 @@ void Animal::aged() {
 	age++;
 	movement = movement - (age / 20); //decereases movement the older the cell is, although this is scaled by the constant 10. Accumulates
 	spawn_distance = 4 - (age / 100);//decreases spawn distance as the cell gets older, scaled by the constant 100. Acculmulates
+}
+Animal Animal::operator+(Plant *p) {
+	Point newLocation = p->getLocation();
+	this->setLocation(newLocation);
+	dec_con_food_counter();
+//	delete p;
+	return *this;
 }

@@ -13,6 +13,7 @@ serve as the base definition for the climates.
 
 #pragma once
 #include <vector>
+#include <iostream>
 #include "Sinusoid.h"
 
 class Environment{
@@ -32,6 +33,7 @@ class Environment{
 
 		//virtual functions
 		virtual void event() = 0;
+		virtual void print() = 0;
 
 		//constructors
 		Environment();

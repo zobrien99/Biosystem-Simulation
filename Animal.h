@@ -9,6 +9,7 @@ Purpose: derived class for macroorganisms; herbivore?
 */
 
 #include "MacroOrganism.h"
+#include "Plant.h"
 #include <cmath>
 #pragma once
 
@@ -34,5 +35,6 @@ class Animal: public MacroOrganism{
 		//other
 		void reproduce(Organism *O);
 		void aged();
+		Animal operator+(Plant *p);
 };
 

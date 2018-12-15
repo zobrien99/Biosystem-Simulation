@@ -16,6 +16,8 @@ class Organism{
 	protected:
 		 int consumption_amount;
 		 int consumption_time;
+		 int consumption_food_counter;
+		 int consumption_time_counter;
 		 int reproduction_amount;
 		 int reproduction_time;
 		 int reproduction_counter;
@@ -34,6 +36,8 @@ class Organism{
 		 int get_rep_amount();
 		 int get_rep_time();
 		 int get_age();
+		 int get_con_food_counter();
+		 int get_con_time_counter();
 		 int get_rep_counter();
 		 double get_movement();
 		 double get_spawn_distance();
@@ -46,10 +50,15 @@ class Organism{
 		 void set_rep_amount(int x);
 		 void set_rep_time(int x);
 		 void set_age(int x);
+		 void set_con_food_counter(int x);
+		 void set_con_time_counter(int x);
+		 void set_rep_counter(int x);
+
 		 void set_movement(double x);
 		 void set_spawn_distance(double x);
 		 void set_visibility(double x);
-		 void set_rep_counter(double x);
-
+	
+		 void dec_con_food_counter();
+		 void dec_con_time_counter();
 		 void dec_rep_counter();
 };
