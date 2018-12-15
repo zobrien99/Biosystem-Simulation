@@ -27,7 +27,7 @@ int main(){
     double x, macEnv_x, macEnv_y, ani_x, ani_y, micEnv_x, micEnv_y; 
     double micEnv_z, bac_x, bac_y, bac_z, min_t, max_t;
 
-	Environment* sim;
+	Environment* sim = NULL;
     
     cout << "Welcome to the Biosystem Simulation program \n\n";    
   
