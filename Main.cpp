@@ -35,7 +35,7 @@ int main(){
     cout << "Enter 1 to simulate macroorganisms or 2 to simulate microorganisms: ";
     cin >> cond;
    
-    if (cond = 1){
+    if (cond == 1){
         
         cout << "Enter x size of Environment: ";
         cin >> macEnv_x;
@@ -66,7 +66,7 @@ int main(){
     }
     
     
-    if (cond = 2){         
+    if (cond == 2){         
          
         cout << "Enter x size of Environment: ";
         cin >> micEnv_x;
