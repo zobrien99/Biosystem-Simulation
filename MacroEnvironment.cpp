@@ -7,123 +7,10 @@ Assignment: Project 3
 
 Purpose: Class for ennvorments on macroscopic scale;
 */
-
 #include "MacroEnvironment.h"
-#include "MacroOrganism.h"
 #include "Miscellaneous.h"
 
 using namespace std;
-
-
-//Utility functions
-//Independent
-bool MacroEnvironment::within_bounds(MacroOrganism &O) {
-	double x_cord = O.getLocation().getX();
-	double y_cord = O.getLocation().getY();
-	
-	if ((x_cord > x_max) || (x_cord < -(x_max)))
-		return false;
-	if ((y_cord > y_max) || (y_cord < -(y_max)))
-		return false;
-	return true;
-}
-void MacroEnvironment::spawn_animals(int num) {
-	double x, y;
-	for (int i = 0; i < num; i++) {
-		x = fRand(-(x_max), x_max);
-		y = fRand(-(y_max), y_max);
-		animals.push_back(new Animal(x, y));
-	}
-}
-void MacroEnvironment::spawn_plants(int num) {
-	double x, y;
-	for (int i = 0; i < num; i++) {
-		x = fRand(-(x_max), x_max);
-		y = fRand(-(y_max), y_max);
-		plants.push_back(new Plant(x, y));
-	}
-}
-
-//Summarizing Functions ->  Made to make event() more readable
-//Animal Actions
-void MacroEnvironment::animal_eat_move() {
-	Plant *closest, *temp;
-	double dist_temp, dist_closest;
-	int index;
-	for (int i = 0; i < animals.size(); i++) {
-		dist_closest = *(animals[i]) - *(plants[0]);
-		closest = plants[0];
-		temp = closest;
-		index = 0;
-		for (unsigned int j = 0; j < plants.size(); j++) {
-			temp = plants[j];
-			dist_temp = *(animals[i]) - *temp;
-			if (dist_temp < dist_closest) {
-				dist_closest = dist_temp;
-				closest = temp;
-				index = j;
-			}
-		}
-		if (dist_closest <= animals[i]->get_movement()) { //closest plant is within movement range
-			*animals[i] + temp;
-			plants.erase(plants.begin() + index);			//PLANT DELETED HERE
-		}
-		else if (dist_closest <= animals[i]->get_visibility()) { // closest plant is within visability range
-			double new_x = animals[i]->getLocation().getX() + animals[i]->get_movement() * animals[i]->unit_x(*temp);
-			double new_y = animals[i]->getLocation().getY() + animals[i]->get_movement() * animals[i]->unit_y(*temp);
-			animals[i]->setLocation(new_x, new_y);
-		}
-		else { //plant is not within visibility range (randomly moves around);
-			double theta = fRand(0, 2 * 3.14159265);
-
-			double new_x = animals[i]->getLocation().getX() + animals[i]->get_movement() * cos(theta);
-			double new_y = animals[i]->getLocation().getY() + animals[i]->get_movement() * sin(theta);
-
-			animals[i]->setLocation(new_x, new_y);
-		}
-	}
-}
-void MacroEnvironment::animal_die() {
-	for (unsigned int i = 0; i < animals.size();) { //techincally a proper declaration, see below
-		if (animals[i]->get_con_food_counter() == 0) {
-			animals[i]->set_con_food_counter(animals[i]->get_con_amount());
-			animals[i]->set_con_time_counter(animals[i]->get_con_time());
-			i++; //manual incrementation
-		}
-		else if (animals[i]->get_con_time_counter() == 0) {
-			animals.erase(animals.begin() + i);
-			//when animal is deleted, every element is shifted to fill the gap, so we want to reasses the same index
-		}
-	}
-}
-void MacroEnvironment::animal_reproduce() {
-	int an = animals.size();
-	for (int i = 0; i < an; i++) {
-		if (animals[i]->get_rep_counter() == 0) {
-			for (int j = 0; j < int(animals[i]->get_rep_amount() * animals[i]->get_fertility()); j++) {
-				Animal *a = NULL;
-				animals[i]->reproduce(a);
-				animals.push_back(a);
-			}
-		}
-		animals[i]->dec_rep_counter();
-	}
-}
-//Plant Actions
-void MacroEnvironment::plant_reproduce() {
-	int pl = plants.size();
-	for (int i = 0; i < pl; i++) {
-		if (plants[i]->get_rep_counter() == 0) {
-			for (int j = 0; j < int(plants[i]->get_rep_amount() * plants[i]->get_fertility()); j++) {
-				Plant *p = NULL;
-				plants[i]->reproduce(p);
-				plants.push_back(p);
-			}
-		}
-		plants[i]->dec_rep_counter();
-	}
-}
-
 
 
 //constructors
@@ -202,7 +89,121 @@ void MacroEnvironment::event() {
 	animal_die();
 	animal_reproduce();
 	plant_reproduce();
+	time++;
 }
 
+//Utility functions
+//Independent
+bool MacroEnvironment::within_bounds(MacroOrganism &O) {
+	double x_cord = O.getLocation().getX();
+	double y_cord = O.getLocation().getY();
+
+	if ((x_cord > x_max) || (x_cord < -(x_max)))
+		return false;
+	if ((y_cord > y_max) || (y_cord < -(y_max)))
+		return false;
+	return true;
+}
+void MacroEnvironment::spawn_animals(int num) {
+	double x, y;
+	for (int i = 0; i < num; i++) {
+		x = fRand(-(x_max), x_max);
+		y = fRand(-(y_max), y_max);
+		animals.push_back(new Animal(x, y));
+	}
+}
+void MacroEnvironment::spawn_plants(int num) {
+	double x, y;
+	for (int i = 0; i < num; i++) {
+		x = fRand(-(x_max), x_max);
+		y = fRand(-(y_max), y_max);
+		plants.push_back(new Plant(x, y));
+	}
+}
+
+//Summarizing Functions ->  Made to make event() more readable
+//Animal Actions
+void MacroEnvironment::animal_eat_move() {
+	vector<Animal*>::iterator i;
+	vector<Plant*>::iterator closest, j;
+	double dist_temp, dist_closest;
+//	int index;
+	for (i = animals.begin(); i != animals.end(); i++ ) {
+		dist_closest = *(*(i)) - *(*(plants.begin()));
+		closest = plants.begin();
+		for (j = plants.begin(); j != plants.end(); j++) {
+			dist_temp = *(*(i)) - *(*(j));
+			if (dist_temp < dist_closest) {
+				dist_closest = dist_temp;
+				closest = j;
+			}
+		}
+		if (dist_closest <= (*i)->get_movement()) { //closest plant is within movement range
+			*(*(i)) + *closest;
+			delete *closest;
+			plants.erase(closest);			//PLANT DELETED HERE
+		}
+		else if (dist_closest <= (*i)->get_visibility()) { // closest plant is within visability range
+			double new_x = (*i)->getLocation().getX() + (*i)->get_movement() * (*i)->unit_x(*(*(closest)));
+			double new_y = (*i)->getLocation().getY() + (*i)->get_movement() * (*i)->unit_y(*(*(closest)));
+			(*i)->setLocation(new_x, new_y);
+		}
+		else { //plant is not within visibility range (randomly moves around);
+			double theta = fRand(0, 2 * 3.14159265);
+
+			double new_x = (*i)->getLocation().getX() + (*i)->get_movement() * cos(theta);
+			double new_y = (*i)->getLocation().getY() + (*i)->get_movement() * sin(theta);
+
+			(*i)->setLocation(new_x, new_y);
+		}
+		(*i)->dec_con_time_counter();
+	}
+}
+void MacroEnvironment::animal_die() {
+//	vector<Animal*>::iterator it;
+
+	for (unsigned int i = 0; i < animals.size();) { //techincally a proper declaration, see below
+		if (animals[i]->get_con_food_counter() == 0) {
+			animals[i]->set_con_food_counter(animals[i]->get_con_amount());
+			animals[i]->set_con_time_counter(animals[i]->get_con_time());
+			i++; //manual incrementation
+		}
+		else if (animals[i]->get_con_time_counter() == 0) {
+			delete animals[i];
+			animals.erase(animals.begin() + 1);
+			//when animal is deleted, every element is shifted to fill the gap, so we want to reasses the same index
+		}
+		else{
+			i++;
+		}
+	}
+}
+void MacroEnvironment::animal_reproduce() {
+	int an = animals.size();
+	for (int i = 0; i < an; i++) {
+		if (animals[i]->get_rep_counter() == 0) {
+			for (int j = 0; j < int(animals[i]->get_rep_amount() * animals[i]->get_fertility()); j++) {
+				Animal *a = new Animal(0, 0);
+				animals[i]->reproduce(a);
+				animals.push_back(a);
+			}
+		}
+		animals[i]->dec_rep_counter();
+	}
+}
+//Plant Actions
+void MacroEnvironment::plant_reproduce() {
+	int pl = plants.size();
+	for (int i = 0; i < pl; i++) {
+		if (plants[i]->get_rep_counter() == 0) {
+			for (int j = 0; j < int(plants[i]->get_rep_amount() * plants[i]->get_fertility()); j++) {
+				Plant *p = new Plant(0,0);
+				plants[i]->reproduce(p);
+				plants.push_back(p);
+			}
+		}
+		plants[i]->dec_rep_counter();
+	}
+}
 
 
