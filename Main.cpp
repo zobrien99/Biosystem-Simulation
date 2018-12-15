@@ -24,9 +24,9 @@ using namespace std;
 
 int main(){
     
-    int cond, ani_pop, plant_pop, bact_pop, fung_pop, numenv, t;
-    double x, macEnv_x, macEnv_y, ani_x, ani_y, micEnv_x, micEnv_y; 
-    double micEnv_z, bac_x, bac_y, bac_z, min_t, max_t;
+    int cond, ani_pop, plant_pop, bact_pop, fung_pop, t;
+    double macEnv_x, macEnv_y, micEnv_x, micEnv_y; 
+    double micEnv_z, min_t, max_t;
 
 	Environment* sim = NULL;
     
@@ -61,10 +61,6 @@ while (cond == 1 || cond == 2){
         cout << "Enter plant population: ";
         cin >> plant_pop;       
         
-        /*cout << "Enter animal x location: ";
-        cin >> ani_x;
-        cout << "Enter animal y location: ";
-        cin >> ani_y;*/        
                         
         cout << "Enter time for simulation: ";
         cin >> t;
@@ -94,12 +90,7 @@ while (cond == 1 || cond == 2){
         cin >> bact_pop;
         cout << "Enter fungus population: ";           
         cin >> fung_pop;
-        /*cout << "Enter bacteria x location: ";
-        cin >> bac_x;
-        cout << "Enter bacteria y location: ";
-        cin >> bac_y;
-        cout << "Enter bacteria z location: ";
-        cin >> bac_z;*/        
+
                 
         cout << "Enter time for simulation: ";
         cin >> t;
