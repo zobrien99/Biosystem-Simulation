@@ -10,19 +10,22 @@ Purpose: derived class for organisms in micro-enviornments
 */
 #include "MacroOrganism.h"
 #include <cmath>
+//getter
 Point MacroOrganism::getLocation()
 {
 	return l;
 }
 
+//setters
 void MacroOrganism::setLocation(double x_new, double y_new) {
 	l.setCoordinates(x_new, y_new);
 }
-
 void MacroOrganism::setLocation(Point p) {
 	l.setCoordinates(p.getX(), p.getY());
 }
 
+//operator overloads
+//(subtract)
 double MacroOrganism::operator-(MacroOrganism & O){
 	double x, y, result;
 	x = delta_x(O);
@@ -31,18 +34,17 @@ double MacroOrganism::operator-(MacroOrganism & O){
 	result = sqrt( pow(x,2.0) + pow(y,2.0));
 	return result;
 }
-
 double MacroOrganism::delta_x(MacroOrganism &O) {
 	return O.getLocation().getX() - l.getX();
 }
 double MacroOrganism::delta_y(MacroOrganism &O) {
 	return O.getLocation().getY() - l.getY();
 }
-
 double MacroOrganism::unit_x(MacroOrganism &O) {
 	return delta_x(O) / (*this - O);
 }
-
 double MacroOrganism::unit_y(MacroOrganism &O) {
 	return delta_y(O) / (*this - O);
 }
+
+//
