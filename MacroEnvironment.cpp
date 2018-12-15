@@ -89,6 +89,7 @@ void MacroEnvironment::event() {
 	animal_die();
 	animal_reproduce();
 	plant_reproduce();
+
 	animal_age();
 	plant_age();
 	time++;
@@ -217,9 +218,11 @@ void MacroEnvironment::plant_reproduce() {
 	}
 }
 
+
 void MacroEnvironment::plant_age() {
 	for (int i = 0; i < plants.size(); i++) {
 		plants[i]->aged();
 	}
 }
+
 

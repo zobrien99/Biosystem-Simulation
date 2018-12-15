@@ -1,3 +1,4 @@
+
 /*
 Authors: Andrew Yoder, Thomas Stryjski, Zachary O'Brien
 Email: aby7159@rit.edu, tgs9181@rit.edu, zjo5244@rit.edu
@@ -30,10 +31,19 @@ int main(){
 	Environment* sim = NULL;
     
     cout << "Welcome to the Biosystem Simulation program \n\n";    
-  
     
+
     cout << "Enter 1 to simulate macroorganisms or 2 to simulate microorganisms: ";
     cin >> cond;
+    
+    while  (cond != 1 && cond != 2){
+    cout << "Enter 1 to simulate macroorganisms or 2 to simulate microorganisms: ";
+    cin >> cond;
+    }
+
+while (cond == 1 || cond == 2){
+    
+    
    
     if (cond == 1){
         
@@ -67,7 +77,7 @@ int main(){
     
     
     if (cond == 2){         
-         
+        
         cout << "Enter x size of Environment: ";
         cin >> micEnv_x;
         cout << "Enter y size of Environment: ";
@@ -103,4 +113,5 @@ int main(){
 	}
 
 }
+   }
    
