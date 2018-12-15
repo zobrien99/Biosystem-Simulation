@@ -23,19 +23,26 @@ class MacroEnvironment : public Environment {
 		vector<Animal*> animals;
 		vector<Plant*> plants;
 
+		double co2;
+		double o2;
+		Sinusoid sunlight;
+
 		//Utility functions
 		//Independent
 		bool within_bounds(MacroOrganism &O);
 		void spawn_animals(int num);
 		void spawn_plants(int num);
+		double get_sunlight(double x, double y);
 
 		//Summarizing Functions ->  Made to make event() more readable
 			//Animal Actions
+		void set_animal_variables();
 		void animal_eat_move();
 		void animal_die();
 		void animal_reproduce();
 		void animal_age();
 			//Plant Actions
+		void set_plant_variables();
 		void plant_reproduce();
 		void plant_age();
 	public:
@@ -53,4 +60,5 @@ class MacroEnvironment : public Environment {
 		//others
 		void event();
 		void print();
+
 };

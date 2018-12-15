@@ -46,6 +46,9 @@ double Animal::get_fertility() {
 void Animal::set_o2(double x) {
 	o2 = x;
 }
+void Animal::set_co2(double x){
+	co2 = x;
+}
 void Animal::set_fertility() {
 	fertility = 1 + ((o2 / 5) - 1);
 }

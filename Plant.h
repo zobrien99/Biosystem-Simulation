@@ -30,7 +30,8 @@ public:
 
 	//setters
 	void set_co2(double x);
-	void set_sunlight();
+	void set_o2(double x);
+	void set_sunlight(double x);
 	void set_fertility(); //determines reproduction values as a function of temperature and sunlight
 
 	//other
