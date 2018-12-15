@@ -9,6 +9,7 @@ Purpose: Executes functions declared in Bacteria.h
 */
 
 #include "Bacteria.h"
+#include "Miscellaneous.h"
 #include <cmath>
 
 
@@ -18,6 +19,9 @@ Bacteria::Bacteria(double x, double y, double z) {
 	consumption_time = 0;
 	reproduction_amount = 5;
 	reproduction_time = 1;
+	reproduction_counter = reproduction_time;
+	consumption_food_counter = consumption_amount;
+	consumption_time_counter = consumption_time;
 	age = 0;
 	movement = 2;
 	spawn_distance = 4;
@@ -27,7 +31,10 @@ Bacteria::Bacteria(double x, double y, double z) {
 }
 
 //getters
-//none needed
+
+double Bacteria::get_fertility() {
+	return fertility;
+}
 
 //setters
 void Bacteria::set_sunlight(double x) {
@@ -42,10 +49,6 @@ void Bacteria::set_fertility() {
 
 //other
 
-double Bacteria::fRand(double fMin, double fMax) {
-	double f = (double)rand() / RAND_MAX;
-	return fMin + f * (fMax - fMin);
-}
 
 void Bacteria::reproduce(Organism *O) {
 	double theta = fRand(0, 2 * 3.14159265);

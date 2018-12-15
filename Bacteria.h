@@ -23,7 +23,8 @@ class Bacteria :public MicroOrganism {
 		Bacteria(double x, double y, double z);
 
 		//getters
-		//none needed
+		
+		double get_fertility();
 
 		//setters
 		void set_sunlight(double x);
@@ -33,7 +34,7 @@ class Bacteria :public MicroOrganism {
 		//other
 		void reproduce(Organism *O);
 		void aged(int AGE);
-		double fRand(double fMin, double fMax);
+
 	
 
 };

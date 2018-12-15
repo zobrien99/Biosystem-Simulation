@@ -10,6 +10,7 @@ Purpose: Implementation of derived class for small fungi.
 */
 
 #include "Fungus.h"
+#include "Miscellaneous.h"
 #include <cmath>
 
 Fungus::Fungus(double x, double y, double z) {
@@ -17,6 +18,9 @@ Fungus::Fungus(double x, double y, double z) {
 	consumption_time = 0;
 	reproduction_amount = 5;
 	reproduction_time = 1;
+	reproduction_counter = reproduction_time;
+	consumption_food_counter = consumption_amount;
+	consumption_time_counter = consumption_time;
 	age = 0;
 	movement = 2;
 	spawn_distance = 4;
@@ -26,6 +30,9 @@ Fungus::Fungus(double x, double y, double z) {
 }
 
 //getters
+double Fungus::get_fertility() {
+	return fertility;
+}
 //none needed
 
 //setters
@@ -35,10 +42,7 @@ void Fungus::set_fertility() {
 
 //other
 
-double Fungus::fRand(double fMin, double fMax) {
-	double f = (double)rand() / RAND_MAX;
-	return fMin + f * (fMax - fMin);
-}
+
 
 void Fungus::reproduce(Organism *O) {
 	double theta = fRand(0, 2 * 3.14159265);

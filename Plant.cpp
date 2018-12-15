@@ -17,6 +17,9 @@ Plant::Plant(double x, double y) {
 	consumption_time = 0;
 	reproduction_amount = 3;
 	reproduction_time = 2;
+	reproduction_counter = reproduction_time;
+	consumption_food_counter = consumption_amount;
+	consumption_time_counter = consumption_time;
 	age = 0;
 	movement = 0;
 	spawn_distance = 3;
