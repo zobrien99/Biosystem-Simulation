@@ -195,7 +195,7 @@ void MacroEnvironment::setBounds(double x, double y) {
 
 //others
 void MacroEnvironment::print() {
-	//cout << "Time: " << time << "";
+	cout << time << "\t" << animal_pop() << "\t" << plant_pop() << endl;
 }
 void MacroEnvironment::event() {
 	animal_eat_move();

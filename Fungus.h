@@ -19,10 +19,15 @@ class Fungus:public MicroOrganism {
         
     public:
         Fungus(double x, double y, double);
-        void set_fertility();
-        void reproduce(Organism *O);
+        //getters
+		double get_fertility();
+
+		//setters
+		void set_fertility();
+        
+		void reproduce(Organism *O);
         void aged(int AGE);
-        double fRand(double fMin, double fMax);    	
+
 
 
 };

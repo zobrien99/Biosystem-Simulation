@@ -116,14 +116,23 @@ int MicroEnvironment::fungus_pop() {
 }
 
 void MicroEnvironment::event() {
-	for (int i = 0; i < bacteria.size(); i++) {
-		Bacteria *a;
-		bacteria[i]->reproduce(a);
-		bacteria.push_back(a);
-	}
+	
 }
 
 void MicroEnvironment::print() {
 	cout << time << "\t" << bacteria_pop() << "\t" << fungus_pop() << endl;
+}
 
+void MicroEnvironment::bacteria_reproduce() {
+	int bac_size = bacteria.size();
+	for (int i = 0; i < bac_size; i++) {
+		if (bacteria[i]->get_rep_counter() == 0) {
+			for (int j = 0; j < int(bacteria[i]->get_rep_amount() * bacteria[i]->get_fertility()); j++) {
+				Bacteria *b = NULL;
+				bacteria[i]->reproduce(b);
+				bacteria.push_back(b);
+			}
+		}
+		bacteria[i]->dec_rep_counter();
+	}
 }

@@ -39,4 +39,15 @@ public:
 
 	void event();
 	void print();
+
+	//Summarizing Functions ->  Made to make event() more readable
+	//Animal Actions
+	void bacteria_move();
+	void bacteria_die();
+	void bacteria_reproduce();
+	//Plant Actions
+	void fungus_move();
+	void fungus_die();
+	void fungus_reproduce();
+
 };
