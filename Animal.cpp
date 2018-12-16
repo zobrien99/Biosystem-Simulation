@@ -51,7 +51,9 @@ void Animal::set_co2(double x){
 	co2 = x;
 }
 void Animal::set_fertility() {
-	fertility = -(pow(temperature,2)/500) + temperature/5 + -(pow(o2, 2) / 375) + o2 / 5 ;
+	double temper = -(pow((temperature - 50), 2) / 500) + (temperature / 5);
+	double oxygen = -(pow((o2 - 300), 2) / 375) + (o2 / 5);
+	fertility = temper + oxygen;
 }
 
 //other
