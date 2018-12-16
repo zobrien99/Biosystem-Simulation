@@ -38,7 +38,6 @@ Animal::Animal(double x, double y) {
 double Animal::get_co2() {
 	return co2;
 }
-
 double Animal::get_fertility() {
 	return fertility;
 }
@@ -65,7 +64,6 @@ void Animal::reproduce(Organism *O) {
 
 		O = new Animal(x,y);	
 }
-
 void Animal::reproduce(Animal *A, double x_max, double y_max) {
 	double theta, x, y;
 	do {
@@ -75,7 +73,6 @@ void Animal::reproduce(Animal *A, double x_max, double y_max) {
 	} while ((x > x_max) || (x < -(x_max)) || (y > y_max) || (y < -(y_max)));
 	A->setLocation(x, y);
 }
-
 void Animal::aged() {
 	age++;
 	movement = movement - (age / 20); //decereases movement the older the cell is, although this is scaled by the constant 10. Accumulates
