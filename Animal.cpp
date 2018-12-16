@@ -66,12 +66,13 @@ void Animal::reproduce(Organism *O) {
 		O = new Animal(x,y);	
 }
 
-void Animal::reproduce(Animal *A) {
-	double theta = fRand(0, 2 * 3.14159265);
-
-	double x = l.getX() + spawn_distance * cos(theta);
-	double y = l.getY() + spawn_distance * sin(theta);
-
+void Animal::reproduce(Animal *A, double x_max, double y_max) {
+	double theta, x, y;
+	do {
+		theta = fRand(0, 2 * 3.14159265);
+		x = l.getX() + spawn_distance * cos(theta);
+		y = l.getY() + spawn_distance * sin(theta);
+	} while ((x > x_max) || (x < -(x_max)) || (y > y_max) || (y < -(y_max)));
 	A->setLocation(x, y);
 }
 

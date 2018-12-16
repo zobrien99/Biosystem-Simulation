@@ -62,13 +62,14 @@ void Plant::set_sunlight(double x) {
 
 //other
 
-void Plant::reproduce(Plant *P) {
+void Plant::reproduce(Plant *P,double x_max, double y_max) {
 	for (int i = 0; i <= int(reproduction_amount * fertility); i++) {
-		double theta = fRand(0, 2 * 3.14159265);
-
-		double x = spawn_distance * cos(theta);
-		double y = spawn_distance * sin(theta);
-
+		double theta, x, y;
+		do {
+			theta = fRand(0, 2 * 3.14159265);
+			x = spawn_distance * cos(theta);
+			y = spawn_distance * sin(theta);
+		} while ((x > x_max) || (x < -(x_max)) || (y > y_max) || (y < -(y_max)));
 		P->setLocation(x, y);
 	}
 }
