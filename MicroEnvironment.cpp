@@ -380,7 +380,7 @@ void MicroEnvironment::bacteria_move() {
                                 double new_y = locY + bacteria[i]->get_movement() * sin(phi) * sin(theta);
                                 double new_z = locZ + bacteria[i]->get_movement() * cos(phi);
 
-                                fungi[i]->setLocation(new_x, new_y, new_z);
+                                bacteria[i]->setLocation(new_x, new_y, new_z);
                         }
                 }
                 else { //plant notices no change in chemical in cardinal directions at visibility range (randomly moves around);
