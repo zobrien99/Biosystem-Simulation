@@ -29,7 +29,8 @@ class MacroEnvironment : public Environment {
 
 		//Utility functions
 		//Independent
-		void within_bounds(MacroOrganism * O);
+		double fix_x_cord(double x_old);
+		double fix_y_cord(double y_old);
 		void spawn_animals(int num);
 		void spawn_plants(int num);
 		double get_sunlight(double x, double y);
@@ -45,10 +46,14 @@ class MacroEnvironment : public Environment {
 		void set_plant_variables();
 		void plant_reproduce();
 		void plant_age();
+
 	public:
 		//constructors
 		MacroEnvironment();
 		MacroEnvironment(int t, double min_t, double max_t, double x, double y,int num_animals, int num_plants);
+
+		//deconstructors
+		~MacroEnvironment();
 
 		//getters
 		int animal_pop();

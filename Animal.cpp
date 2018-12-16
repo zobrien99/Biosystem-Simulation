@@ -51,7 +51,9 @@ void Animal::set_co2(double x){
 	co2 = x;
 }
 void Animal::set_fertility() {
-	fertility = -(pow(temperature,2)/500) + temperature/5 + -(pow(o2, 2) / 375) + o2 / 5 ;
+	double temper = -(pow((temperature - 50), 2) / 500) + (temperature / 5);
+	double oxygen = -(pow((o2 - 300), 2) / 375) + (o2 / 5);
+	fertility = temper + oxygen;
 }
 
 //other
@@ -64,12 +66,13 @@ void Animal::reproduce(Organism *O) {
 		O = new Animal(x,y);	
 }
 
-void Animal::reproduce(Animal *A) {
-	double theta = fRand(0, 2 * 3.14159265);
-
-	double x = l.getX() + spawn_distance * cos(theta);
-	double y = l.getY() + spawn_distance * sin(theta);
-
+void Animal::reproduce(Animal *A, double x_max, double y_max) {
+	double theta, x, y;
+	do {
+		theta = fRand(0, 2 * 3.14159265);
+		x = l.getX() + spawn_distance * cos(theta);
+		y = l.getY() + spawn_distance * sin(theta);
+	} while ((x > x_max) || (x < -(x_max)) || (y > y_max) || (y < -(y_max)));
 	A->setLocation(x, y);
 }
 

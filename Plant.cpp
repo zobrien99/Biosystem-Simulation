@@ -51,25 +51,25 @@ void Plant::set_o2(double x){
 	o2 = x;
 }
 void Plant::set_fertility() {
-	fertility = sunlight*co2/10 -(pow(temperature, 2) / 500) + temperature / 5 + -(pow(co2, 2) / 375) + co2 / 5 - 2;
+	double temper = -(pow(temperature - 50, 2) / 500);
+	double carbondioxide = -(pow(co2-300, 2) / 375) + co2 / 5 - 2;
+	fertility = (temper/100) + (sunlight * carbondioxide)/carbondioxide;
 }
 void Plant::set_sunlight(double x) {
 	sunlight = x;
 }
 
-void Plant::set_sunlight(double x) {
-	sunlight = x;
-}
 
 //other
 
-void Plant::reproduce(Plant *P) {
+void Plant::reproduce(Plant *P,double x_max, double y_max) {
 	for (int i = 0; i <= int(reproduction_amount * fertility); i++) {
-		double theta = fRand(0, 2 * 3.14159265);
-
-		double x = spawn_distance * cos(theta);
-		double y = spawn_distance * sin(theta);
-
+		double theta, x, y;
+		do {
+			theta = fRand(0, 2 * 3.14159265);
+			x = spawn_distance * cos(theta);
+			y = spawn_distance * sin(theta);
+		} while ((x > x_max) || (x < -(x_max)) || (y > y_max) || (y < -(y_max)));
 		P->setLocation(x, y);
 	}
 }
