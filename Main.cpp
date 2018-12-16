@@ -68,7 +68,7 @@ int main() {
 			cin >> micEnv_z;
 			cout << "Enter maximum environment temperature: ";
 			cin >> max_t;
-			cout << "Enter minimum envitonment temperature: ";
+			cout << "Enter minimum environment temperature: ";
 			cin >> min_t;
 			cout << "Enter bacteria population: ";
 			cin >> bact_pop;
