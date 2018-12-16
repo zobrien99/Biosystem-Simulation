@@ -41,7 +41,7 @@ int main(){
     cin >> cond;
     }
 
-while (cond == 1 || cond == 2){
+
     
     
    
@@ -104,5 +104,5 @@ while (cond == 1 || cond == 2){
 	}
 
 }
-   }
+
    
