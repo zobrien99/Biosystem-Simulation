@@ -32,7 +32,7 @@ class Bacteria :public MicroOrganism {
 		void set_fertility(); //determines reproduction values as a function of temperature and sunlight
 
 		//other
-		void reproduce(Organism *O);
+		void reproduce(Bacteria *O);
 		void aged();
 
 	

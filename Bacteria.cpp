@@ -50,7 +50,7 @@ void Bacteria::set_fertility() {
 //other
 
 
-void Bacteria::reproduce(Organism *O) {
+void Bacteria::reproduce(Bacteria *O) {
 	double theta = fRand(0, 2 * 3.14159265);
 	double phi = fRand(0, 2 * 3.14159265);
 
