@@ -11,6 +11,7 @@ Purpose: Executes functions declared in Animal.h
 #include "Animal.h"
 #include "Miscellaneous.h"
 
+
 //constructors
 Animal::Animal(double x, double y) {
 	consumption_amount = 1;
@@ -25,6 +26,10 @@ Animal::Animal(double x, double y) {
 	spawn_distance = 4;
 	visibility = 2;
 
+	//temp setter
+	o2 = 5;
+	co2 = 5;
+	fertility = 1;
 
 	setLocation(x, y);
 }
@@ -42,8 +47,11 @@ double Animal::get_fertility() {
 void Animal::set_o2(double x) {
 	o2 = x;
 }
+void Animal::set_co2(double x){
+	co2 = x;
+}
 void Animal::set_fertility() {
-	fertility = 1 + ((o2 / 5) - 1);
+	fertility = -(pow(temperature,2)/500) + temperature/5 + -(pow(o2, 2) / 375) + o2 / 5 ;
 }
 
 //other
@@ -53,8 +61,18 @@ void Animal::reproduce(Organism *O) {
 		double x = l.getX() + spawn_distance * cos(theta);
 		double y = l.getY() + spawn_distance * sin(theta);
 
-		O = new Animal(x, y);	
+		O = new Animal(x,y);	
 }
+
+void Animal::reproduce(Animal *A) {
+	double theta = fRand(0, 2 * 3.14159265);
+
+	double x = l.getX() + spawn_distance * cos(theta);
+	double y = l.getY() + spawn_distance * sin(theta);
+
+	A->setLocation(x, y);
+}
+
 void Animal::aged() {
 	age++;
 	movement = movement - (age / 20); //decereases movement the older the cell is, although this is scaled by the constant 10. Accumulates

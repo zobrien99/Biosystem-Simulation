@@ -11,43 +11,52 @@ Purpose: Class for ennvorments on microscopic scale;
 #pragma once
 
 #include "Environment.h"
-#include "MicroOrganism.h"
 #include "Bacteria.h"
 #include "Fungus.h"
 #include <vector>
+
 using namespace std;
+
 
 class MicroEnvironment : public Environment {
 
-private:
-	Sinusoid temp;
-	double x_max, y_max, z_max;
-	vector<Bacteria*> bacteria;
-	vector<Fungus*> fungi;
+	private:
+		double x_max, y_max, z_max;
+		vector<Bacteria*> bacteria;
+		vector<Fungus*> fungi;
+		Sinusoid sunlight;
 
-	bool within_bounds(MicroOrganism &O);
-    void spawn_bacteria(int num);
-    void spawn_fungi(int num);
+		//Utility functions
+		//Independent
+		bool within_bounds(MicroOrganism &O);
+		void spawn_bacteria(int num);
+		void spawn_fungi(int num);
 
-public:
-	MicroEnvironment();
-    int bacteria_pop();
-    int fungus_pop();
-        
-    MicroEnvironment(int t, double min_t, double max_t, double x, double y, double z, int num_bacteria, int num_fungus);
-	void setBounds(double x, double y, double z);
+		//Summarizing Functions ->  Made to make event() more readable
+		//Fungus Actions
+		void fungus_eat_move();
+		void fungus_die();
+		void fungus_reproduce();
 
-	void event();
-	void print();
+		//Bacteria Actions
+		void bacteria_move();
+		void bacteria_reproduce();
 
-	//Summarizing Functions ->  Made to make event() more readable
-	//Animal Actions
-	void bacteria_move();
-	void bacteria_die();
-	void bacteria_reproduce();
-	//Plant Actions
-	void fungus_move();
-	void fungus_die();
-	void fungus_reproduce();
+	public:
+		//constructors
+		MicroEnvironment();
+		MicroEnvironment(int t, double min_t, double max_t, double x, double y, double z, int num_bacteria, int num_fungus);
 
+		//getters
+		int bacteria_pop();
+		int fungus_pop();
+		double get_sunlight(double x, double y, double z);
+		double get_chemical(double x, double y, double z);
+		
+		//setters
+		void setBounds(double x, double y, double z);
+
+		//others
+		void event();
+		void print();
 };

@@ -16,8 +16,8 @@ Purpose: derived class for macroorganisms; herbivore?
 class Plant : public MacroOrganism {
 protected:
 	double sunlight;
-	double co2 = 0;
-	double o2 = 1;
+	double co2;
+	double o2;
 	double fertility;
 
 public:
@@ -30,10 +30,12 @@ public:
 
 	//setters
 	void set_co2(double x);
-	void set_sunlight();
+	void set_o2(double x);
+	void set_sunlight(double x);
 	void set_fertility(); //determines reproduction values as a function of temperature and sunlight
 
 	//other
 	void reproduce(Organism *O);
+	void reproduce(Plant *P);
 	void aged();
 };
