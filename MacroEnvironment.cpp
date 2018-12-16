@@ -9,7 +9,7 @@ Purpose: Class for ennvorments on macroscopic scale;
 */
 #include "MacroEnvironment.h"
 #include "Miscellaneous.h"
-
+#include <cmath>
 using namespace std;
 
 
@@ -25,6 +25,11 @@ MacroEnvironment::MacroEnvironment() {
 	double center = (max_temp + min_temp) / 2;
 	Sinusoid a(amplitude, 10.0, 0.0, center);
 	temp = a;
+
+	co2 = 10;
+	o2 = 10;
+	Sinusoid binaryoscillator(0.5, 10, 0, 0.5);
+	sunlight = binaryoscillator;
 
 	setBounds(50, 50);
 	//	vector<Animal> a_temp(10);
@@ -45,6 +50,11 @@ MacroEnvironment::MacroEnvironment(int t, double min_t, double max_t, double x, 
 	double center = (max_temp + min_temp) / 2;
 	Sinusoid a(amplitude, 10.0, 0.0, center);
 	temp = a;
+
+	co2 = 10;
+	o2 = 10;
+	Sinusoid binaryoscillator(0.5, 10, 0, 0.5);
+	sunlight = binaryoscillator;
 
 	setBounds(x, y);
 	//	vector <Animal> a_temp (num_animals);
@@ -82,9 +92,22 @@ void MacroEnvironment::setBounds(double x, double y) {
 
 //others
 void MacroEnvironment::print() {
-	cout << time << "\t" << animal_pop() << "\t" << plant_pop() << endl;
+//	cout << time << "\t" << animal_pop() << "\t" << plant_pop() << endl;
+	cout << time << "\t" << animal_pop() << "\t" << plant_pop() << "\t" << o2 << "\t" << co2 << endl;
 }
 void MacroEnvironment::event() {
+	
+	o2 += plants.size() - animals.size();
+	if (o2 < 0)
+		o2 = 0;
+
+	co2 += animals.size() - plants.size();
+	if (co2 < 0)
+		co2 = 0;
+
+	set_animal_variables();
+	set_plant_variables();
+
 	animal_eat_move();
 	animal_die();
 	animal_reproduce();
@@ -97,16 +120,29 @@ void MacroEnvironment::event() {
 
 //Utility functions
 //Independent
-bool MacroEnvironment::within_bounds(MacroOrganism &O) {
-	double x_cord = O.getLocation().getX();
-	double y_cord = O.getLocation().getY();
+void MacroEnvironment::within_bounds(MacroOrganism *O) {
+	double x_cord = O->getLocation().getX();
+	double y_cord = O->getLocation().getY();
 
-	if ((x_cord > x_max) || (x_cord < -(x_max)))
-		return false;
-	if ((y_cord > y_max) || (y_cord < -(y_max)))
-		return false;
-	return true;
+	double new_x, new_y;
+		
+	if (x_cord > x_max)
+		new_x = x_max;
+	else if (x_cord < -(x_max))
+		new_x = -(x_max);
+	else
+		new_x = x_cord;
+	
+	if (y_cord > y_max)
+		new_y = y_max;
+	else if (y_cord < -(y_max))
+		new_y = -(y_max);
+	else
+		new_y = y_cord;
+
+	O->setLocation(new_x, new_y);
 }
+
 void MacroEnvironment::spawn_animals(int num) {
 	double x, y;
 	for (int i = 0; i < num; i++) {
@@ -124,8 +160,27 @@ void MacroEnvironment::spawn_plants(int num) {
 	}
 }
 
+double MacroEnvironment::get_sunlight(double x, double y)
+{
+	double s = 1 - pow(x, 2) / pow(x_max, 2) - pow(y, 2) / pow(y_max, 2);
+		if (s < 0)
+			s = 0;
+	return sunlight.func(time) * s;
+
+}
+
 //Summarizing Functions ->  Made to make event() more readable
 //Animal Actions
+
+void MacroEnvironment::set_animal_variables() {
+	for (unsigned int i = 0; i < animals.size(); i++) {
+		animals[i]->set_o2(o2);
+		animals[i]->set_co2(co2);
+		animals[i]->set_temp(temp.func(time));
+		within_bounds(animals[i]);
+	}
+}
+
 void MacroEnvironment::animal_eat_move() {
 	vector<Animal*>::iterator i;
 	vector<Plant*>::iterator closest, j;
@@ -173,7 +228,8 @@ void MacroEnvironment::animal_die() {
 		}
 		else if (animals[i]->get_con_time_counter() == 0) {
 			delete animals[i];
-			animals.erase(animals.begin() + 1);
+			animals.erase(animals.begin() + i);
+			
 			//when animal is deleted, every element is shifted to fill the gap, so we want to reasses the same index
 		}
 		else{
@@ -197,13 +253,26 @@ void MacroEnvironment::animal_reproduce() {
 }
 void MacroEnvironment::animal_age(){
 
-	for (int i = 0; i < animals.size(); i++) {
+	for (unsigned int i = 0; i < animals.size(); i++) {
 		animals[i]->aged();
 	}
 
 }
 
 //Plant Actions
+void MacroEnvironment::set_plant_variables() {
+	for (unsigned int i = 0; i < plants.size(); i++) {
+		plants[i]->set_co2(co2);
+		plants[i]->set_o2(o2);
+		double x = plants[i]->getLocation().getX();
+		double y = plants[i]->getLocation().getY();
+		double sun = get_sunlight(x, y);
+		plants[i]->set_sunlight(sun);
+		plants[i]->set_temp(temp.func(time));
+		within_bounds(plants[i]);
+	}
+}
+
 void MacroEnvironment::plant_reproduce() {
 	int pl = plants.size();
 	for (int i = 0; i < pl; i++) {
@@ -220,7 +289,7 @@ void MacroEnvironment::plant_reproduce() {
 
 
 void MacroEnvironment::plant_age() {
-	for (int i = 0; i < plants.size(); i++) {
+	for (unsigned int i = 0; i < plants.size(); i++) {
 		plants[i]->aged();
 	}
 }
