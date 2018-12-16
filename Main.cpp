@@ -97,7 +97,7 @@ int main(){
         sim = new MicroEnvironment(t, min_t, max_t, micEnv_x, micEnv_y, micEnv_z, bact_pop, fung_pop); 
         
     }   
-    
+    	cout << "\nTime\t" << "Animal\t" << "Plant\t\n";
 	for (int i = 0; i < sim->get_run_to_time(); i++) {
 		sim->event();
 			sim->print();
