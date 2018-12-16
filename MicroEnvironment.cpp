@@ -376,10 +376,6 @@ void MicroEnvironment::bacteria_move() {
 				fungi[i]->setLocation(new_x, new_y, new_z);
 			}
 		}
-		else {
-			bacteria[i]->setLocation(s_x_choose, s_y_choose, s_z_choose);
-		}
-		
 		else { //plant notices no change in chemical in cardinal directions at visibility range (randomly moves around);
 			double theta = fRand(0, 2 * 3.14159265);
 			double phi = fRand(0, 2 * 3.14159265);
