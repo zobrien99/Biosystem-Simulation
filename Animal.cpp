@@ -11,6 +11,7 @@ Purpose: Executes functions declared in Animal.h
 #include "Animal.h"
 #include "Miscellaneous.h"
 
+
 //constructors
 Animal::Animal(double x, double y) {
 	consumption_amount = 1;
@@ -50,7 +51,7 @@ void Animal::set_co2(double x){
 	co2 = x;
 }
 void Animal::set_fertility() {
-	fertility = 1 + ((o2 / 5) - 1);
+	fertility = -(pow(temperature,2)/500) + temperature/5 + -(pow(o2, 2) / 375) + o2 / 5 ;
 }
 
 //other

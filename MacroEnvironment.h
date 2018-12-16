@@ -29,7 +29,7 @@ class MacroEnvironment : public Environment {
 
 		//Utility functions
 		//Independent
-		bool within_bounds(MacroOrganism &O);
+		void within_bounds(MacroOrganism * O);
 		void spawn_animals(int num);
 		void spawn_plants(int num);
 		double get_sunlight(double x, double y);

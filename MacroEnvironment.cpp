@@ -92,10 +92,20 @@ void MacroEnvironment::setBounds(double x, double y) {
 
 //others
 void MacroEnvironment::print() {
-	cout << time << "\t" << animal_pop() << "\t" << plant_pop() << endl;
+//	cout << time << "\t" << animal_pop() << "\t" << plant_pop() << endl;
+	cout << time << "\t" << animal_pop() << "\t" << plant_pop() << "\t" << o2 << "\t" << co2 << endl;
 }
 void MacroEnvironment::event() {
 	
+
+	o2 += plants.size() - animals.size();
+	if (o2 < 0)
+		o2 = 0;
+
+	co2 += animals.size() - plants.size();
+	if (co2 < 0)
+		co2 = 0;
+
 	set_animal_variables();
 	set_plant_variables();
 
@@ -111,16 +121,29 @@ void MacroEnvironment::event() {
 
 //Utility functions
 //Independent
-bool MacroEnvironment::within_bounds(MacroOrganism &O) {
-	double x_cord = O.getLocation().getX();
-	double y_cord = O.getLocation().getY();
+void MacroEnvironment::within_bounds(MacroOrganism *O) {
+	double x_cord = O->getLocation().getX();
+	double y_cord = O->getLocation().getY();
 
-	if ((x_cord > x_max) || (x_cord < -(x_max)))
-		return false;
-	if ((y_cord > y_max) || (y_cord < -(y_max)))
-		return false;
-	return true;
+	double new_x, new_y;
+		
+	if (x_cord > x_max)
+		new_x = x_max;
+	else if (x_cord < -(x_max))
+		new_x = -(x_max);
+	else
+		new_x = x_cord;
+	
+	if (y_cord > y_max)
+		new_y = y_max;
+	else if (y_cord < -(y_max))
+		new_y = -(y_max);
+	else
+		new_y = y_cord;
+
+	O->setLocation(new_x, new_y);
 }
+
 void MacroEnvironment::spawn_animals(int num) {
 	double x, y;
 	for (int i = 0; i < num; i++) {
@@ -154,6 +177,10 @@ void MacroEnvironment::set_animal_variables() {
 	for (unsigned int i = 0; i < animals.size(); i++) {
 		animals[i]->set_o2(o2);
 		animals[i]->set_co2(co2);
+
+		animals[i]->set_temp(temp.func(time));
+		within_bounds(animals[i]);
+
 	}
 }
 
@@ -243,6 +270,10 @@ void MacroEnvironment::set_plant_variables() {
 		double y = plants[i]->getLocation().getY();
 		double sun = get_sunlight(x, y);
 		plants[i]->set_sunlight(sun);
+
+		plants[i]->set_temp(temp.func(time));
+		within_bounds(plants[i]);
+
 	}
 }
 

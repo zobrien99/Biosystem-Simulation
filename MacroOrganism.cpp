@@ -15,6 +15,9 @@ Point MacroOrganism::getLocation()
 {
 	return l;
 }
+double MacroOrganism::get_temp() {
+	return temperature;
+}
 
 //setters
 void MacroOrganism::setLocation(double x_new, double y_new) {
@@ -22,6 +25,9 @@ void MacroOrganism::setLocation(double x_new, double y_new) {
 }
 void MacroOrganism::setLocation(Point p) {
 	l.setCoordinates(p.getX(), p.getY());
+}
+void MacroOrganism::set_temp(double t){
+	temperature = t;
 }
 
 //operator overloads

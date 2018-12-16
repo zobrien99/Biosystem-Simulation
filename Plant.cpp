@@ -51,11 +51,16 @@ void Plant::set_o2(double x){
 	o2 = x;
 }
 void Plant::set_fertility() {
-	fertility = sunlight * ((co2 / 5) - 1);
+	fertility = sunlight*co2/10 -(pow(temperature, 2) / 500) + temperature / 5 + -(pow(co2, 2) / 375) + co2 / 5 - 2;
 }
 void Plant::set_sunlight(double x) {
 	sunlight = x;
 }
+
+void Plant::set_sunlight(double x) {
+	sunlight = x;
+}
+
 //other
 
 void Plant::reproduce(Plant *P) {

@@ -16,8 +16,8 @@ Purpose: derived class for macroorganisms; herbivore?
 class Plant : public MacroOrganism {
 protected:
 	double sunlight;
-	double co2 = 0;
-	double o2 = 1;
+	double co2;
+	double o2;
 	double fertility;
 
 public:
