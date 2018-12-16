@@ -33,7 +33,7 @@ class MacroEnvironment : public Environment {
 		void spawn_animals(int num);
 		void spawn_plants(int num);
 		double get_sunlight(double x, double y);
-//		double get_temp();
+
 		//Summarizing Functions ->  Made to make event() more readable
 			//Animal Actions
 		void set_animal_variables();

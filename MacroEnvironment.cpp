@@ -97,6 +97,7 @@ void MacroEnvironment::print() {
 }
 void MacroEnvironment::event() {
 	
+
 	o2 += plants.size() - animals.size();
 	if (o2 < 0)
 		o2 = 0;
@@ -176,8 +177,10 @@ void MacroEnvironment::set_animal_variables() {
 	for (unsigned int i = 0; i < animals.size(); i++) {
 		animals[i]->set_o2(o2);
 		animals[i]->set_co2(co2);
+
 		animals[i]->set_temp(temp.func(time));
 		within_bounds(animals[i]);
+
 	}
 }
 
@@ -229,7 +232,6 @@ void MacroEnvironment::animal_die() {
 		else if (animals[i]->get_con_time_counter() == 0) {
 			delete animals[i];
 			animals.erase(animals.begin() + i);
-			
 			//when animal is deleted, every element is shifted to fill the gap, so we want to reasses the same index
 		}
 		else{
@@ -268,8 +270,10 @@ void MacroEnvironment::set_plant_variables() {
 		double y = plants[i]->getLocation().getY();
 		double sun = get_sunlight(x, y);
 		plants[i]->set_sunlight(sun);
+
 		plants[i]->set_temp(temp.func(time));
 		within_bounds(plants[i]);
+
 	}
 }
 
