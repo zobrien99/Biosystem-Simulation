@@ -113,11 +113,11 @@ void MacroEnvironment::print() {
 void MacroEnvironment::event() {
 	
 
-	o2 += plants.size() - animals.size();
+	o2 += plant_pop() - animal_pop();
 	if (o2 < 0)
 		o2 = 0;
 
-	co2 += animals.size() - plants.size();
+	co2 += animal_pop() - plant_pop();
 	if (co2 < 0)
 		co2 = 0;
 
