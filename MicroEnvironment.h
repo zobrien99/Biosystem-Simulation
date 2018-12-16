@@ -37,10 +37,12 @@ class MicroEnvironment : public Environment {
 		void fungus_eat_move();
 		void fungus_die();
 		void fungus_reproduce();
+		void fungus_age();
 
 		//Bacteria Actions
 		void bacteria_move();
 		void bacteria_reproduce();
+		void bacteria_age();
 
 	public:
 		//constructors

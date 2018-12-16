@@ -112,8 +112,11 @@ void MicroEnvironment::event() {
         bacteria_move();
         fungus_eat_move();
         fungus_die();
+		bacteria_reproduce();
         fungus_reproduce();
-        bacteria_reproduce();
+		bacteria_age();
+		fungus_age();
+		time++;
 }
 void MicroEnvironment::print() {
         cout << time << "\t" << bacteria_pop() << "\t" << fungus_pop() << endl;
@@ -152,7 +155,6 @@ void MicroEnvironment::spawn_fungi(int num) {
                 fungi.push_back(new Fungus(x, y, z));
         }
 }
-
 
 //Summarizing Functions ->  Made to make event() more readable
 //Fungus Actions
@@ -221,6 +223,11 @@ void MicroEnvironment::fungus_reproduce() {
                 }
                 fungi[i]->dec_rep_counter();
         }
+}
+void MicroEnvironment::fungus_age() {
+	for (unsigned int i = 0; i < fungi.size(); i++) { //for loop is unsigned because vector index are undsigned
+		fungi[i]->aged();
+	}
 }
 
 //Bacteria Actions
@@ -401,5 +408,10 @@ void MicroEnvironment::bacteria_reproduce() {
                 }
                 bacteria[i]->dec_rep_counter();
         }
+}
+void MicroEnvironment::bacteria_age() {
+	for (unsigned int i = 0; i < bacteria.size(); i++) { //for loop is unsigned because vector index are undsigned
+		bacteria[i]->aged();
+	}
 }
 

@@ -30,7 +30,7 @@ class Fungus:public MicroOrganism {
         
 		//others
 		void reproduce(Organism *O);
-        void aged(int AGE);
+        void aged();
 		Fungus operator+(Bacteria *b);
 
 

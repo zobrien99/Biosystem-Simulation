@@ -33,7 +33,7 @@ class Bacteria :public MicroOrganism {
 
 		//other
 		void reproduce(Organism *O);
-		void aged(int AGE);
+		void aged();
 
 	
 
