@@ -36,5 +36,5 @@ class MicroOrganism :public Organism {
 		double unit_z(MicroOrganism &O);
 
 		//other
-		virtual void reproduce(MicroOrganism *O) = 0;
+		//virtual void reproduce(MicroOrganism *O) = 0;
 };

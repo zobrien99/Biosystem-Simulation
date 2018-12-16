@@ -39,5 +39,5 @@ class MacroOrganism :public Organism {
 		double unit_y(MacroOrganism &O);
 
 		//other
-		virtual void reproduce(MacroOrganism *O) = 0;
+		//virtual void reproduce(MacroOrganism *O) = 0;
 };
