@@ -45,6 +45,7 @@ class MacroEnvironment : public Environment {
 		void set_plant_variables();
 		void plant_reproduce();
 		void plant_age();
+
 	public:
 		//constructors
 		MacroEnvironment();

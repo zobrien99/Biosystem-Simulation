@@ -143,7 +143,6 @@ void MacroEnvironment::within_bounds(MacroOrganism *O) {
 
 	O->setLocation(new_x, new_y);
 }
-
 void MacroEnvironment::spawn_animals(int num) {
 	double x, y;
 	for (int i = 0; i < num; i++) {
@@ -160,7 +159,6 @@ void MacroEnvironment::spawn_plants(int num) {
 		plants.push_back(new Plant(x, y));
 	}
 }
-
 double MacroEnvironment::get_sunlight(double x, double y)
 {
 	double s = 1 - pow(x, 2) / pow(x_max, 2) - pow(y, 2) / pow(y_max, 2);
@@ -172,7 +170,6 @@ double MacroEnvironment::get_sunlight(double x, double y)
 
 //Summarizing Functions ->  Made to make event() more readable
 //Animal Actions
-
 void MacroEnvironment::set_animal_variables() {
 	for (unsigned int i = 0; i < animals.size(); i++) {
 		animals[i]->set_o2(o2);
@@ -183,7 +180,6 @@ void MacroEnvironment::set_animal_variables() {
 
 	}
 }
-
 void MacroEnvironment::animal_eat_move() {
 	vector<Animal*>::iterator i;
 	vector<Plant*>::iterator closest, j;
@@ -276,7 +272,6 @@ void MacroEnvironment::set_plant_variables() {
 
 	}
 }
-
 void MacroEnvironment::plant_reproduce() {
 	int pl = plants.size();
 	for (int i = 0; i < pl; i++) {
@@ -290,8 +285,6 @@ void MacroEnvironment::plant_reproduce() {
 		plants[i]->dec_rep_counter();
 	}
 }
-
-
 void MacroEnvironment::plant_age() {
 	for (unsigned int i = 0; i < plants.size(); i++) {
 		plants[i]->aged();

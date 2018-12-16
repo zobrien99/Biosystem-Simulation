@@ -61,7 +61,8 @@ void Bacteria::reproduce(Organism *O) {
 	O = new Bacteria(x, y, z);
 
 }
-void Bacteria::aged(int a) {
-	movement = movement - (a/20); //decereases movement the older the cell is, although this is scaled by the constant 10. Accumulates
-	spawn_distance = 4 - (a / 100);//decreases spawn distance as the cell gets older, scaled by the constant 100. Acculmulates
+void Bacteria::aged() {
+	age++;
+	movement = movement - (age/20); //decereases movement the older the cell is, although this is scaled by the constant 10. Accumulates
+	spawn_distance = 4 - (age / 100);//decreases spawn distance as the cell gets older, scaled by the constant 100. Acculmulates
 }
