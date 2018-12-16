@@ -243,6 +243,7 @@ void MicroEnvironment::bacteria_move() {
 		double s_x_choose;
 		double s_y_choose;
 		double s_z_choose;
+		double s_at_choose;
 		double s_fertility;
 
 		//sample chemical at cardinal directions
@@ -256,36 +257,129 @@ void MicroEnvironment::bacteria_move() {
 		double c_x_choose;
 		double c_y_choose;
 		double c_z_choose;
+		double c_at_choose;
 		double c_fertility;
 		
-		//chosing stuff
-		if (s_at_xpos != s_at_xneg) {
-			if (s_at_xpos > s_at_xneg) {
-				s_x_choose = s_at_xpos;
+		int ifsimp = 1; //only added this so i could shrink the choosing protocol
+		//choosing protocol for sunshine:
+		if (ifsimp == 1) {//chosing stuff for sunlight
+			//choosing x
+			if (s_at_xpos != s_at_xneg) {
+				if (s_at_xpos > s_at_xneg) {
+					s_x_choose = locX + vis;
+				}
+				else {
+					s_x_choose = locX - vis;
+				}
 			}
 			else {
-				s_x_choose = s_at_xneg;
+				s_x_choose = locX;
+			}
+
+			//choosing y
+			if (s_at_ypos != s_at_yneg) {
+				if (s_at_ypos > s_at_yneg) {
+					s_y_choose = locY + vis;
+				}
+				else {
+					s_y_choose = locY - vis;
+				}
+			}
+			else {
+				s_y_choose = locY;
+			}
+
+			//choosing z
+			if (s_at_zpos != s_at_zneg) {
+				if (s_at_zpos > s_at_zneg) {
+					s_z_choose = locZ + vis;
+				}
+				else {
+					s_z_choose = locZ - vis;
+				}
+			}
+			else {
+				s_z_choose = locZ;
+			}
+		}
+		//same protocol for chemical:
+		if (ifsimp == 1) {
+			if (c_at_xpos != c_at_xneg) {
+				if (c_at_xpos > c_at_xneg) {
+					c_x_choose = locX + vis;
+				}
+				else {
+					c_x_choose = locX - vis;
+				}
+			}
+			else {
+				c_x_choose = locX;
+			}
+
+			//choosing y
+			if (c_at_ypos != c_at_yneg) {
+				if (c_at_ypos > c_at_yneg) {
+					c_y_choose = locY + vis;
+				}
+				else {
+					c_y_choose = locY - vis;
+				}
+			}
+			else {
+				c_y_choose = locY;
+			}
+
+			//choosing z
+			if (c_at_zpos != c_at_zneg) {
+				if (c_at_zpos > c_at_zneg) {
+					c_z_choose = locZ + vis;
+				}
+				else {
+					c_z_choose = locZ - vis;
+				}
+			}
+			else {
+				c_z_choose = locZ;
+			}
+		}
+	
+		if (c_x_choose != s_x_choose || c_y_choose != s_y_choose || c_z_choose != s_z_choose) {
+			//updating parameters for sunshine recommeded destination and chemical recommened destination fertility calculations
+			//because using the method set_fertility 
+			s_at_choose = get_sunlight(s_x_choose, s_y_choose, s_z_choose);
+			c_at_choose = get_chemical(s_x_choose, s_y_choose, s_z_choose);
+			bacteria[i]->set_sunlight(s_at_choose);
+			bacteria[i]->set_chemical(c_at_choose);
+			bacteria[i]->set_fertility();
+			s_fertility = bacteria[i]->get_fertility();
+
+			s_at_choose = get_sunlight(c_x_choose, c_y_choose, c_z_choose);
+			c_at_choose = get_chemical(c_x_choose, c_y_choose, c_z_choose);
+			bacteria[i]->set_sunlight(s_at_choose);
+			bacteria[i]->set_chemical(c_at_choose);
+			bacteria[i]->set_fertility();
+			c_fertility = bacteria[i]->get_fertility();
+			if (s_fertility > c_fertility) {
+				bacteria[i]->setLocation(s_x_choose, s_y_choose, s_z_choose);
+			}
+			else if (s_fertility < c_fertility) {
+				bacteria[i]->setLocation(c_x_choose, c_y_choose, c_z_choose);
+			}
+			else {
+				double theta = fRand(0, 2 * 3.14159265);
+				double phi = fRand(0, 2 * 3.14159265);
+
+				double new_x = locX + bacteria[i]->get_movement() * sin(phi) * cos(theta);
+				double new_y = locY + bacteria[i]->get_movement() * sin(phi) * sin(theta);
+				double new_z = locZ + bacteria[i]->get_movement() * cos(phi);
+
+				fungi[i]->setLocation(new_x, new_y, new_z);
 			}
 		}
 		else {
-			s_x_choose = ;
+			bacteria[i]->setLocation(s_x_choose, s_y_choose, s_z_choose);
 		}
-
-		bacteria[i]
-		bacteria[i]->set_chemical
-		s_magn = sqrt(pow(s_x_choose, 2) + pow(s_y_choose, 2) + pow(s_z_choose, 2));
-		c_magn = sqrt(pow(c_x_choose, 2) + pow(c_y_choose, 2) + pow(c_z_choose, 2));
-		if (sqrt(()) != xneg) {
-
-		}
-		else (!= )
 		
-		else if (dist_closest <= bacteria[i]->get_visibility()) { // closest plant is within visability range
-			double new_x = fungi[i]->getLocation().getX() + fungi[i]->get_movement() * fungi[i]->unit_x(*temp);
-			double new_y = fungi[i]->getLocation().getY() + fungi[i]->get_movement() * fungi[i]->unit_y(*temp);
-			double new_z = fungi[i]->getLocation().getZ() + fungi[i]->get_movement() * fungi[i]->unit_z(*temp);
-			fungi[i]->setLocation(new_x, new_y, new_z);
-		}
 		else { //plant notices no change in chemical in cardinal directions at visibility range (randomly moves around);
 			double theta = fRand(0, 2 * 3.14159265);
 			double phi = fRand(0, 2 * 3.14159265);

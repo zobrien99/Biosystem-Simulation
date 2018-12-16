@@ -10,6 +10,7 @@ Purpose: derived class for small fungi
 */
 
 #include "MicroOrganism.h"
+#include "Bacteria.h"
 #pragma once
 
 class Fungus:public MicroOrganism {
@@ -18,16 +19,19 @@ class Fungus:public MicroOrganism {
 		double fertility;        
         
     public:
+		//constructors
         Fungus(double x, double y, double);
+
         //getters
 		double get_fertility();
 
 		//setters
 		void set_fertility();
         
+		//others
 		void reproduce(Organism *O);
         void aged(int AGE);
-
+		Fungus operator+(Bacteria *b);
 
 
 };
