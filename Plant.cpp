@@ -57,9 +57,6 @@ void Plant::set_sunlight(double x) {
 	sunlight = x;
 }
 
-void Plant::set_sunlight(double x) {
-	sunlight = x;
-}
 
 //other
 
