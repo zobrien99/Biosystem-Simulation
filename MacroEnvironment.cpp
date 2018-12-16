@@ -155,7 +155,6 @@ double MacroEnvironment::fix_y_cord(double y_old) {
 	else
 		return y_old;
 }
-
 void MacroEnvironment::spawn_animals(int num) {
 	double x, y;
 	for (int i = 0; i < num; i++) {
@@ -232,6 +231,7 @@ void MacroEnvironment::animal_eat_move() {
 		}
 		animals[i]->dec_con_time_counter();
 	}
+
 }
 
 //old eat move method

@@ -16,18 +16,25 @@ Purpose: derived class for organisms in micro-enviornments
 class MicroOrganism :public Organism {
 	protected:
 		Point_3D l;
+
 	public:
+		//getters
 		Point_3D getLocation();
+
+		//setters
 		void setLocation(double x_new, double y_new, double z_new);
 		void setLocation(Point_3D p);
 
+		//Operator Overloading
+		//(-) and associated methods
 		double operator-(MicroOrganism &O);
-
 		double delta_x(MicroOrganism &O);
 		double delta_y(MicroOrganism &O);
 		double delta_z(MicroOrganism &O);
-
 		double unit_x(MicroOrganism &O);
 		double unit_y(MicroOrganism &O);
 		double unit_z(MicroOrganism &O);
+
+		//other
+		//virtual void reproduce(MicroOrganism *O) = 0;
 };
