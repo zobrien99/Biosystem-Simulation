@@ -112,11 +112,14 @@ void MicroEnvironment::event() {
         bacteria_move();
         fungus_eat_move();
         fungus_die();
+		bacteria_reproduce();
         fungus_reproduce();
-        bacteria_reproduce();
+		bacteria_age();
+		fungus_age();
+		time++;
 }
 void MicroEnvironment::print() {
-        cout << time << "\t" << bacteria_pop() << "\t" << fungus_pop() << endl;
+        cout << time << "\t" << fungus_pop() << "\t" << bacteria_pop() << endl;
 }
 
 //Utility functions
@@ -152,7 +155,6 @@ void MicroEnvironment::spawn_fungi(int num) {
                 fungi.push_back(new Fungus(x, y, z));
         }
 }
-
 
 //Summarizing Functions ->  Made to make event() more readable
 //Fungus Actions
@@ -210,17 +212,23 @@ void MicroEnvironment::fungus_die() {
         }
 }
 void MicroEnvironment::fungus_reproduce() {
-        int fu = fungi.size();
-        for (int i = 0; i < fu; i++) {
-                if (fungi[i]->get_rep_counter() == 0) {
-                        for (int j = 0; j < int(fungi[i]->get_rep_amount() * fungi[i]->get_fertility()); j++) {
-                                Fungus *f = new Fungus(0, 0, 0);
+	int fu = fungi.size();
+    for (int i = 0; i < fu; i++) {
+		if (fungi[i]->get_rep_counter() == 0) {
+			int constant_rep_amount = int(fungi[i]->get_rep_amount() * fungi[i]->get_fertility());
+				for (int j = 0; j < constant_rep_amount; j++) {
+								Fungus *f = new Fungus(0, 0, 0);
                                 fungi[i]->reproduce(f);
                                 fungi.push_back(f);
-                        }
                 }
+		}
                 fungi[i]->dec_rep_counter();
-        }
+	}
+}
+void MicroEnvironment::fungus_age() {
+	for (unsigned int i = 0; i < fungi.size(); i++) { //for loop is unsigned because vector index are undsigned
+		fungi[i]->aged();
+	}
 }
 
 //Bacteria Actions
@@ -373,7 +381,7 @@ void MicroEnvironment::bacteria_move() {
                                 double new_y = locY + bacteria[i]->get_movement() * sin(phi) * sin(theta);
                                 double new_z = locZ + bacteria[i]->get_movement() * cos(phi);
 
-                                fungi[i]->setLocation(new_x, new_y, new_z);
+                                bacteria[i]->setLocation(new_x, new_y, new_z);
                         }
                 }
                 else { //plant notices no change in chemical in cardinal directions at visibility range (randomly moves around);
@@ -401,5 +409,10 @@ void MicroEnvironment::bacteria_reproduce() {
                 }
                 bacteria[i]->dec_rep_counter();
         }
+}
+void MicroEnvironment::bacteria_age() {
+	for (unsigned int i = 0; i < bacteria.size(); i++) { //for loop is unsigned because vector index are undsigned
+		bacteria[i]->aged();
+	}
 }
 

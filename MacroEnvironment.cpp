@@ -211,7 +211,7 @@ void MacroEnvironment::animal_eat_move() {
 		}
 		if (dist_closest <= animals[i]->get_movement()) { //closest plant is within movement range
 			*(animals[i]) + closest;
-			
+			delete closest;
 			plants.erase(plants.begin()+index);			//PLANT DELETED HERE
 		}
 		else if (dist_closest <= animals[i]->get_visibility()) { // closest plant is within visability range
@@ -330,12 +330,9 @@ void MacroEnvironment::set_plant_variables() {
 }
 void MacroEnvironment::plant_reproduce() {
 	int pl = plants.size();
-    int val;
-    if (pl<=0){
 	for (int i = 0; i < pl; i++) {
 		if (plants[i]->get_rep_counter() == 0) {
-            val = (plants[i]->get_rep_amount() * plants[i]->get_fertility());
-			for (int j = 0; j < val ; j++) {
+			for (int j = 0; j < int(plants[i]->get_rep_amount() * plants[i]->get_fertility()); j++) {
 				Plant *p = new Plant(0,0);
 				plants[i]->reproduce(p);
 				plants.push_back(p);
@@ -343,7 +340,6 @@ void MacroEnvironment::plant_reproduce() {
 		}
 		plants[i]->dec_rep_counter();
 	}
-}
 }
 void MacroEnvironment::plant_age() {
 	for (unsigned int i = 0; i < plants.size(); i++) {

@@ -28,7 +28,8 @@ class Organism{
 
 	public:
 		//abstract functions, must be defined in inherited classes
-		 virtual void reproduce(Organism *O)=0;
+		//virtual void reproduce(Organism *O)=0;
+		//Abstract methods used in Macro/Micro Organisms
 
 		 //getters
 		 int get_con_amount();

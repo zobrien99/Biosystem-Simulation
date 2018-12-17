@@ -31,6 +31,7 @@ int main() {
 
 
 	while (terminate != 0){
+		srand(1);
 		cout << "\n\n\nWelcome to the Biosystem Simulation program \n";
 		cout << "_________________________________________________________________________________\n";
 		cout << "Enter 1 to simulate macroorganisms or 2 to simulate microorganisms: ";
@@ -68,7 +69,7 @@ int main() {
 			cin >> micEnv_z;
 			cout << "Enter maximum environment temperature: ";
 			cin >> max_t;
-			cout << "Enter minimum envitonment temperature: ";
+			cout << "Enter minimum environment temperature: ";
 			cin >> min_t;
 			cout << "Enter bacteria population: ";
 			cin >> bact_pop;
@@ -79,7 +80,12 @@ int main() {
 			sim = new MicroEnvironment(t, min_t, max_t, micEnv_x, micEnv_y, micEnv_z, bact_pop, fung_pop);
 		}
 
-		cout << "\nTime\t" << "Animal\t" << "Plant\t\n";
+		if (cond == 1) {
+			cout << "\nTime\t" << "Animal\t" << "Plant\t\n";
+		}
+		if (cond == 2) {
+			cout << "\nTime\t" << "Fungus\t" << "Bacteria\t\n";
+		}
 		for (int i = 0; i < sim->get_run_to_time(); i++) {
 			sim->event();
 			sim->print();

@@ -19,14 +19,17 @@ class MacroOrganism :public Organism {
 	protected:
 		Point l;
 		double temperature;
+
 	public:
 		//getters
 		Point getLocation();
 		double get_temp();
+
 		//setters
 		void setLocation(double x_new, double y_new);
 		void setLocation(Point p);
 		void set_temp(double t);
+
 		//Operator Overloading
 		//(-) and associated methods
 		double operator-(MacroOrganism &O);
@@ -34,4 +37,7 @@ class MacroOrganism :public Organism {
 		double delta_y(MacroOrganism &O);
 		double unit_x(MacroOrganism &O);
 		double unit_y(MacroOrganism &O);
+
+		//other
+		//virtual void reproduce(MacroOrganism *O) = 0;
 };
