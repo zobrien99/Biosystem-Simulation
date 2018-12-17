@@ -22,7 +22,7 @@ Animal::Animal(double x, double y) {
 	consumption_food_counter = consumption_amount;
 	consumption_time_counter = consumption_time;
 	age = 0;
-	movement = 1;
+	movement = 3;
 	spawn_distance = 4;
 	visibility = 2;
 
@@ -51,7 +51,11 @@ void Animal::set_co2(double x){
 }
 void Animal::set_fertility() {
 	double temper = -(pow((temperature - 50), 2) / 500) + (temperature / 5);
-	double oxygen = -(pow((o2 - 300), 2) / 375) + (o2 / 5);
+	double oxygen = -(pow(o2, 2) / 375) + (o2 / 5);
+	if (temper < 0)
+		temper = 0;
+	if (oxygen < 0)
+		oxygen = 0;
 	fertility = temper + oxygen;
 }
 
@@ -59,8 +63,8 @@ void Animal::set_fertility() {
 void Animal::reproduce(Organism *O) {
 		double theta = fRand(0, 2 * 3.14159265);
 
-		double x = l.getX() + spawn_distance * cos(theta);
-		double y = l.getY() + spawn_distance * sin(theta);
+		double x = round((l.getX() + spawn_distance * cos(theta)) * 10000) / 10000;
+		double y = round((l.getY() + spawn_distance * sin(theta)) * 10000) / 10000;
 
 		O = new Animal(x,y);	
 }
@@ -68,8 +72,8 @@ void Animal::reproduce(Animal *A, double x_max, double y_max) {
 	double theta, x, y;
 	do {
 		theta = fRand(0, 2 * 3.14159265);
-		x = l.getX() + spawn_distance * cos(theta);
-		y = l.getY() + spawn_distance * sin(theta);
+		x = round((l.getX() + spawn_distance * cos(theta))*10000)/10000;
+		y = round((l.getY() + spawn_distance * sin(theta))*10000)/10000;
 	} while ((x > x_max) || (x < -(x_max)) || (y > y_max) || (y < -(y_max)));
 	A->setLocation(x, y);
 }
