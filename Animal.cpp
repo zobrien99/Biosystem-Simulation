@@ -54,7 +54,12 @@ void Animal::set_fertility() {
 	//format , in this case: e^(-1/a * (x-d)^(2)), where a is the horizontal strech factor of the curve and d is the desired/optimal value where the function = 1
 	double temper = exp((-1 / 200) * pow((temperature - 50), 2));
 	double oxygen = exp((-1 / 10000) * pow((o2 - 300), 2));
-	fertility = 1 + temper + oxygen;
+	if (o2 <= 0) {
+		fertility = 0;
+	}
+	else {
+		fertility = 1 + temper + oxygen;
+	}
 }
 
 //other
