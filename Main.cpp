@@ -22,9 +22,6 @@ using namespace std;
 
 
 int main() {
-	//set random number generator back to intial value
-	srand(1);
-
 	int cond, ani_pop, plant_pop, bact_pop, fung_pop, t;
 	double macEnv_x, macEnv_y, micEnv_x, micEnv_y;
 	double micEnv_z, min_t, max_t;
@@ -34,6 +31,7 @@ int main() {
 
 
 	while (terminate != 0){
+		srand(1);
 		cout << "\n\n\nWelcome to the Biosystem Simulation program \n";
 		cout << "_________________________________________________________________________________\n";
 		cout << "Enter 1 to simulate macroorganisms or 2 to simulate microorganisms: ";
