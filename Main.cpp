@@ -22,6 +22,9 @@ using namespace std;
 
 
 int main() {
+	//set random number generator back to intial value
+	srand(1);
+
 	int cond, ani_pop, plant_pop, bact_pop, fung_pop, t;
 	double macEnv_x, macEnv_y, micEnv_x, micEnv_y;
 	double micEnv_z, min_t, max_t;
