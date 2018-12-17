@@ -65,6 +65,21 @@ MacroEnvironment::MacroEnvironment(int t, double min_t, double max_t, double x, 
 	spawn_plants(num_plants);
 }
 
+//deconstructor
+
+MacroEnvironment::~MacroEnvironment()
+{
+	for (int i = 0; i < animals.size(); i++){
+		delete (animals[i]);
+	}
+	animals.clear();
+	
+	for (int j = 0; j < plants.size(); j++) {
+		delete (plants[j]);
+	}
+	plants.clear();
+}
+
 //getters
 int MacroEnvironment::animal_pop() {
 	return animals.size();
@@ -98,11 +113,11 @@ void MacroEnvironment::print() {
 void MacroEnvironment::event() {
 	
 
-	o2 += plants.size() - animals.size();
+	o2 += plant_pop() - animal_pop();
 	if (o2 < 0)
 		o2 = 0;
 
-	co2 += animals.size() - plants.size();
+	co2 += animal_pop() - plant_pop();
 	if (co2 < 0)
 		co2 = 0;
 
@@ -121,29 +136,25 @@ void MacroEnvironment::event() {
 
 //Utility functions
 //Independent
-void MacroEnvironment::within_bounds(MacroOrganism *O) {
-	double x_cord = O->getLocation().getX();
-	double y_cord = O->getLocation().getY();
+double MacroEnvironment::fix_x_cord(double x_old) {
 
-	double new_x, new_y;
-		
-	if (x_cord > x_max)
-		new_x = x_max;
-	else if (x_cord < -(x_max))
-		new_x = -(x_max);
+	if (x_old > x_max)
+		return x_max;
+	else if (x_old < -(x_max))
+		return -(x_max);
 	else
-		new_x = x_cord;
-	
-	if (y_cord > y_max)
-		new_y = y_max;
-	else if (y_cord < -(y_max))
-		new_y = -(y_max);
-	else
-		new_y = y_cord;
+		return x_old;
 
-	O->setLocation(new_x, new_y);
 }
+double MacroEnvironment::fix_y_cord(double y_old) {
 
+	if (y_old > y_max)
+		return y_max;
+	else if (y_old < -(y_max))
+		return -(y_max);
+	else
+		return y_old;
+}
 void MacroEnvironment::spawn_animals(int num) {
 	double x, y;
 	for (int i = 0; i < num; i++) {
@@ -160,7 +171,6 @@ void MacroEnvironment::spawn_plants(int num) {
 		plants.push_back(new Plant(x, y));
 	}
 }
-
 double MacroEnvironment::get_sunlight(double x, double y)
 {
 	double s = 1 - pow(x, 2) / pow(x_max, 2) - pow(y, 2) / pow(y_max, 2);
@@ -172,54 +182,96 @@ double MacroEnvironment::get_sunlight(double x, double y)
 
 //Summarizing Functions ->  Made to make event() more readable
 //Animal Actions
-
 void MacroEnvironment::set_animal_variables() {
 	for (unsigned int i = 0; i < animals.size(); i++) {
 		animals[i]->set_o2(o2);
 		animals[i]->set_co2(co2);
 
 		animals[i]->set_temp(temp.func(time));
-		within_bounds(animals[i]);
-
 	}
 }
 
 void MacroEnvironment::animal_eat_move() {
-	vector<Animal*>::iterator i;
-	vector<Plant*>::iterator closest, j;
+	Plant * closest, * temp;
 	double dist_temp, dist_closest;
-//	int index;
-	for (i = animals.begin(); i != animals.end(); i++ ) {
-		dist_closest = *(*(i)) - *(*(plants.begin()));
-		closest = plants.begin();
-		for (j = plants.begin(); j != plants.end(); j++) {
-			dist_temp = *(*(i)) - *(*(j));
+	int index;
+
+	for (int i = 0; i != animals.size(); i++) {
+		dist_closest = *(animals[i]) - *(plants[0]);
+		closest = plants[0];
+		temp = closest;
+		index = 0;
+		for (int j = 0; j < plants.size(); j++) {
+			dist_temp = *(animals[i]) - *(plants[j]);
 			if (dist_temp < dist_closest) {
 				dist_closest = dist_temp;
-				closest = j;
+				closest = temp;
+				index = j;
 			}
 		}
-		if (dist_closest <= (*i)->get_movement()) { //closest plant is within movement range
-			*(*(i)) + *closest;
-			delete *closest;
-			plants.erase(closest);			//PLANT DELETED HERE
+		if (dist_closest <= animals[i]->get_movement()) { //closest plant is within movement range
+			*(animals[i]) + closest;
+			
+			plants.erase(plants.begin()+index);			//PLANT DELETED HERE
 		}
-		else if (dist_closest <= (*i)->get_visibility()) { // closest plant is within visability range
-			double new_x = (*i)->getLocation().getX() + (*i)->get_movement() * (*i)->unit_x(*(*(closest)));
-			double new_y = (*i)->getLocation().getY() + (*i)->get_movement() * (*i)->unit_y(*(*(closest)));
-			(*i)->setLocation(new_x, new_y);
+		else if (dist_closest <= animals[i]->get_visibility()) { // closest plant is within visability range
+			double x = animals[i]->getLocation().getX() + animals[i]->get_movement() * animals[i]->unit_x(*closest);
+			double y = animals[i]->getLocation().getY() + animals[i]->get_movement() * animals[i]->unit_y(*closest);
+			animals[i]->setLocation(x,y);
 		}
 		else { //plant is not within visibility range (randomly moves around);
-			double theta = fRand(0, 2 * 3.14159265);
+			double x, y, theta;
 
-			double new_x = (*i)->getLocation().getX() + (*i)->get_movement() * cos(theta);
-			double new_y = (*i)->getLocation().getY() + (*i)->get_movement() * sin(theta);
-
-			(*i)->setLocation(new_x, new_y);
+			do {
+				theta = fRand(0, 2 * 3.14159265);
+				x = animals[i]->getLocation().getX() + animals[i]->get_movement() * cos(theta);
+				y = animals[i]->getLocation().getY() + animals[i]->get_movement() * sin(theta);
+			} while ((x > x_max) || (x < -(x_max)) || (y > y_max) || (y < -(y_max)));
+			animals[i]->setLocation(x, y);
 		}
-		(*i)->dec_con_time_counter();
+		animals[i]->dec_con_time_counter();
 	}
+
 }
+
+//old eat move method
+
+//void MacroEnvironment::animal_eat_move() {
+//	vector<Animal*>::iterator i;
+//	vector<Plant*>::iterator closest, j;
+//	double dist_temp, dist_closest;
+////	int index;
+//	for (i = animals.begin(); i != animals.end(); i++ ) {
+//		dist_closest = *(*(i)) - *(*(plants.begin()));
+//		closest = plants.begin();
+//		for (j = plants.begin(); j != plants.end(); j++) {
+//			dist_temp = *(*(i)) - *(*(j));
+//			if (dist_temp < dist_closest) {
+//				dist_closest = dist_temp;
+//				closest = j;
+//			}
+//		}
+//		if (dist_closest <= (*i)->get_movement()) { //closest plant is within movement range
+//			*(*(i)) + *closest;
+//			delete *closest;
+//			plants.erase(closest);			//PLANT DELETED HERE
+//		}
+//		else if (dist_closest <= (*i)->get_visibility()) { // closest plant is within visability range
+//			double new_x = (*i)->getLocation().getX() + (*i)->get_movement() * (*i)->unit_x(*(*(closest)));
+//			double new_y = (*i)->getLocation().getY() + (*i)->get_movement() * (*i)->unit_y(*(*(closest)));
+//			(*i)->setLocation(new_x, new_y);
+//		}
+//		else { //plant is not within visibility range (randomly moves around);
+//			double theta = fRand(0, 2 * 3.14159265);
+//
+//			double new_x = (*i)->getLocation().getX() + (*i)->get_movement() * cos(theta);
+//			double new_y = (*i)->getLocation().getY() + (*i)->get_movement() * sin(theta);
+//
+//			(*i)->setLocation(new_x, new_y);
+//		}
+//		(*i)->dec_con_time_counter();
+//	}
+//}
 void MacroEnvironment::animal_die() {
 //	vector<Animal*>::iterator it;
 
@@ -246,7 +298,8 @@ void MacroEnvironment::animal_reproduce() {
 			animals[i]->set_fertility();
 			for (int j = 0; j < int(animals[i]->get_rep_amount() * animals[i]->get_fertility()); j++) {
 				Animal *a = new Animal(0, 0);
-				animals[i]->reproduce(a);
+				animals[i]->reproduce(a,x_max,y_max);
+
 				animals.push_back(a);
 			}
 		}
@@ -272,16 +325,17 @@ void MacroEnvironment::set_plant_variables() {
 		plants[i]->set_sunlight(sun);
 
 		plants[i]->set_temp(temp.func(time));
-		within_bounds(plants[i]);
 
 	}
 }
-
 void MacroEnvironment::plant_reproduce() {
 	int pl = plants.size();
+    int val;
+    if (pl<=0){
 	for (int i = 0; i < pl; i++) {
 		if (plants[i]->get_rep_counter() == 0) {
-			for (int j = 0; j < int(plants[i]->get_rep_amount() * plants[i]->get_fertility()); j++) {
+            val = (plants[i]->get_rep_amount() * plants[i]->get_fertility());
+			for (int j = 0; j < val ; j++) {
 				Plant *p = new Plant(0,0);
 				plants[i]->reproduce(p);
 				plants.push_back(p);
@@ -290,8 +344,7 @@ void MacroEnvironment::plant_reproduce() {
 		plants[i]->dec_rep_counter();
 	}
 }
-
-
+}
 void MacroEnvironment::plant_age() {
 	for (unsigned int i = 0; i < plants.size(); i++) {
 		plants[i]->aged();
