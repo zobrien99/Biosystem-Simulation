@@ -58,7 +58,9 @@ void Plant::set_fertility() {
 	if (co2 <= 0) {
 		fertility = 0;
 	}
-	fertility = 1 + temper + sunlight + carbondioxide;
+	else {
+		fertility = 1 + temper + sunlight + carbondioxide;
+	}
 }
 void Plant::set_sunlight(double x) {
 	sunlight = x;
