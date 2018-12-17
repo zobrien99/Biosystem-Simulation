@@ -50,13 +50,11 @@ void Animal::set_co2(double x){
 	co2 = x;
 }
 void Animal::set_fertility() {
-	double temper = -(pow((temperature - 50), 2) / 500) + (temperature / 5);
-	double oxygen = -(pow(o2, 2) / 375) + (o2 / 5);
-	if (temper < 0)
-		temper = 0;
-	if (oxygen < 0)
-		oxygen = 0;
-	fertility = temper + oxygen;
+	//after having tried upside-down parabolas to unsucessfully model organisms having optimal fertility, we discovered the amazing gaussian curve!
+	//format , in this case: e^(-1/a * (x-d)^(2)), where a is the horizontal strech factor of the curve and d is the desired/optimal value where the function = 1
+	double temper = exp((-1 / 200) * pow((temperature - 50), 2));
+	double oxygen = exp((-1 / 10000) * pow((o2 - 300), 2));
+	fertility = 1 + temper + oxygen;
 }
 
 //other
