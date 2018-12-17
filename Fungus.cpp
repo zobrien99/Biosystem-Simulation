@@ -37,6 +37,7 @@ double Fungus::get_fertility() {
 
 //setters
 void Fungus::set_fertility() {
+	//gauss = exp(-1 * pow((temperature - 50), 2));
 	fertility = 2;
 }
 
